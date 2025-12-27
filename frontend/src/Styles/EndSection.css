@@ -1,0 +1,44 @@
+.cta-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 3rem 1.5rem;
+    margin: 3rem auto;
+    max-width: 900px;
+    text-align: center;
+    background-color: #f4faff;
+    border-radius: 1rem;
+    /* box-shadow: 0 10px 25px rgba(133, 156, 226, 0.3); */
+
+}
+
+.cta-header {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    color: #111827;
+}
+
+.cta-btn {
+    width: fit-content;
+    padding: 0.8rem 2.5rem;
+
+    font-size: 1rem;
+    font-weight: 600;
+
+    border: none;
+    border-radius: 0.6rem;
+    cursor: pointer;
+
+    background: linear-gradient(135deg, #041b69, #3f5fc0);
+    color: white;
+
+    box-shadow: 0 10px 25px rgba(63, 95, 192, 0.35);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.cta-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 14px 30px rgba(63, 95, 192, 0.45);
+}
