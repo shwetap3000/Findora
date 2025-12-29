@@ -6,10 +6,23 @@ from rest_framework.response import Response
 from rest_framework import status
 from rest_framework.decorators import api_view
 
+
+# # Static data
+# def studentView(request):
+#     student = {
+#             'id' : 1,
+#             'name' : "Shweta",
+#             'age' : 20,
+#         } 
+        
+
+#     return JsonResponse(student)
+
 # Dynamic data
 @api_view(['GET' , 'POST'])
 def StudentsView(request):
     if (request.method == 'GET'):
+        # here student is the variable which is storing all the objects and Student is the model name
         students = Student.objects.all()
         serializers = StudentSerializer(students , many=True)
         return Response(serializers.data , status=status.HTTP_200_OK)
@@ -51,11 +64,6 @@ def StudentView(request , pk):
 
 
 
-
-
-
-
-
     # students = Student.objects.all()
     # print(students)
 
@@ -64,14 +72,3 @@ def StudentView(request , pk):
     # return JsonResponse(students_list , safe=False)
 
 
-
-# # Static data
-# def studentView(request):
-#     student = {
-#             'id' : 1,
-#             'name' : "Shweta",
-#             'age' : 20,
-#         } 
-        
-
-#     return JsonResponse(student)
