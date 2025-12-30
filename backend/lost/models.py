@@ -3,11 +3,13 @@ from django.db import models
 class Lost(models.Model):
     title = models.CharField(max_length=50)
     description = models.CharField(max_length=500)
-    date_lost = models.DateField()
-    location_lost = models.CharField(max_length=120)
+    # not using name as date_lost or date_found bcoz it will create confusion while mapping in frontend
+    date = models.DateField()
+    location = models.CharField(max_length=120)
     additional_identifiers = models.TextField(blank=True)
     reward = models.CharField(blank=True)
     image = models.FileField(blank=True)
+    status = models.CharField(editable=False, default="lost", max_length=10)
     contact_type = models.CharField()
     created_at = models.DateTimeField(auto_now=True)
 

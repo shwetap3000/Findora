@@ -4,6 +4,8 @@ import '../../Styles/Dashboard.css';
 function ItemCard({items, displayItems}) {
   return (
     <div className="items-wrapper">
+
+      {/* while mapping over the items the name should be same as the fields name in django */}
         {displayItems.map((item) => (
           <div className="dashboard-item-card" key={item.id}>
             <div className="item-header">
@@ -14,11 +16,11 @@ function ItemCard({items, displayItems}) {
             </div>
 
             <p className="item-venue">
-              <strong>Venue:</strong> {item.venue}
+              <strong>Venue:</strong> {item.location}
             </p>
 
             <p className="item-date">
-              <strong>Reported on:</strong> {item.reported_at}
+              <strong>Reported on:</strong> {item.date}
             </p>
           </div>
         ))}

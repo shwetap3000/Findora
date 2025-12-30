@@ -9,10 +9,17 @@ import {
 import ItemCard from "./ItemCard";
 import Items from "./Items";
 
-// Array of objects of all the items
-const items = Items;
+// // Array of objects of all the items
+// for static data
+// const items = Items;
 
 function Dashboard() {
+
+  // This should be inside the funciton component
+  const items = Items();
+  // console.log(items);
+
+
   // state variable to store the current value to be display
   const [clicked, setClicked] = useState("all");
   let displayItems;
@@ -39,34 +46,40 @@ function Dashboard() {
 
   // console.log(displayItems);
 
-  return ( 
+  return (
     <div>
       <h1 className="dashboard-main-heading">Item Dashboard</h1>
 
       <div className="btns-wrapper">
         <button className="all-items-btn" onClick={handleAllBtnClick}>
           <div className="btn-wrapper">
-            <FontAwesomeIcon icon={faCircleChevronDown} style={{color: "darkblue"}}/>
+            <FontAwesomeIcon
+              icon={faCircleChevronDown}
+              style={{ color: "darkblue" }}
+            />
             <h4>All Items</h4>
           </div>
         </button>
 
         <button className="lost-items-btn" onClick={handleLostBtnClick}>
           <div className="btn-wrapper">
-            <FontAwesomeIcon icon={faMagnifyingGlass} style={{color: "red"}}/>
+            <FontAwesomeIcon
+              icon={faMagnifyingGlass}
+              style={{ color: "red" }}
+            />
             <h4>Lost Items</h4>
           </div>
         </button>
 
         <button className="found-items-btn" onClick={handleFoundBtnClick}>
           <div className="btn-wrapper">
-            <FontAwesomeIcon icon={faMapPin} style={{color: "green"}}/>
+            <FontAwesomeIcon icon={faMapPin} style={{ color: "green" }} />
             <h4>Found Items</h4>
           </div>
         </button>
       </div>
 
-    {/* passed items and displayItems as props */}
+      {/* passed items and displayItems as props */}
       <ItemCard items={items} displayItems={displayItems} />
     </div>
   );
