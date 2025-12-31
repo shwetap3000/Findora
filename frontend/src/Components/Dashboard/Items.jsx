@@ -12,7 +12,18 @@ function Items() {
   // combining both lost and found items into a single array of objects for easier mapping and display
   const allItems = [...lostItems, ...foundItems];
 
-  return allItems;
+//   // sorting items -- sorting alphabetically by title
+//   const sortedItems = [...allItems].sort((a, b) => 
+//   a.title.localeCompare(b.title)
+// );
+
+
+  // sorting items -- sorting by reported date (newest first)
+  const sortedItems = [...allItems].sort((a, b) => 
+  new Date(b.date) - new Date(a.date)
+  )
+
+  return sortedItems;
 }
 
 export default Items

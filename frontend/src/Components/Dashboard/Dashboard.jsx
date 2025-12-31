@@ -7,7 +7,7 @@ import {
   faCircleChevronDown,
 } from "@fortawesome/free-solid-svg-icons";
 import ItemCard from "./ItemCard";
-import Items from "./Items";
+import sortedItems from "./Items";
 
 // // Array of objects of all the items
 // for static data
@@ -16,7 +16,7 @@ import Items from "./Items";
 function Dashboard() {
 
   // This should be inside the funciton component
-  const items = Items();
+  const items = sortedItems();
   // console.log(items);
 
 
