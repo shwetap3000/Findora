@@ -8,7 +8,7 @@ from rest_framework import status
 
 # decorators to specify the type of method
 @api_view(['GET'])
-def LostView(request):
+def getLostItemsView(request):
     if (request.method == 'GET'):
         # fetching all the data from the database
         lost_items = Lost.objects.all()
@@ -16,6 +16,28 @@ def LostView(request):
         # converting query objects (of fetched data) into json format
         serializer = LostSerializer(lost_items, many=True)      # many=True because there will be many items
         return Response(serializer.data, status=status.HTTP_200_OK)
+    
+@api_view(['POST'])
+def addLostItemsView(request):
+    serializer = LostSerializer(data = request.data)
+
+    # Serializer only accepts field names that exactly match model fields
+    if serializer.is_valid():
+        serializer.save()
+        return Response(serializer.data, status=status.HTTP_201_CREATED)
+    print(serializer.errors)
+    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+
+# # post method to get data from frontend (not saving into database yet.. just printing data in the terminal)
+# @api_view(['POST'])
+# def addLostItemsView(request):
+#     if (request.method == 'POST'):
+#         data = request.data
+#         print(data)
+#         return Response("Data receied successfully", status=status.HTTP_201_CREATED)
+
 
 
 # # Static data -- added manually

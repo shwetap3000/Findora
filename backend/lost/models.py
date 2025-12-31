@@ -8,9 +8,9 @@ class Lost(models.Model):
     location = models.CharField(max_length=120)
     additional_identifiers = models.TextField(blank=True)
     reward = models.CharField(blank=True)
-    image = models.FileField(blank=True)
+    image = models.FileField(upload_to='lost_images', blank=True, null=True)
     status = models.CharField(editable=False, default="lost", max_length=10)
-    contact_type = models.CharField()
+    contact_type = models.CharField(max_length=10)
     created_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):

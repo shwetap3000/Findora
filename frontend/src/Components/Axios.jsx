@@ -45,6 +45,11 @@
 
 
 
+
+
+
+// get method to fetch data from backend
+
 // import React, { useEffect, useState } from 'react'
 // import axios from 'axios'
 
@@ -82,3 +87,54 @@
 // }
 
 // export default Axios
+
+
+
+
+
+
+// post method to send data to backend (not savind in database yet)
+
+import React, { useState } from 'react'
+import axios from 'axios'
+
+function Axios() {
+
+    const [title, setTitle] = useState("");
+    const [desc, setDesc] = useState(""); 
+
+    const handleSubmit = async () => {
+        try {
+            const response = await axios.post(
+                "http://127.0.0.1:8000/lost/add_items/",
+                {
+                    title: title,
+                    description: desc,
+                }
+            );
+
+            console.log("Data sent successfully");
+        } catch (error) {
+            console.error("Error message: ", error);
+        }
+    };
+
+  return (
+    <div>
+        <input 
+        type='text'
+        value={title}
+        onChange={(e) => setTitle(e.target.value)}
+        />
+
+        <textarea
+        value={desc}
+        onChange={(e) => setDesc(e.target.value)}
+        />
+
+        <button onClick={handleSubmit}>Submit</button>
+    </div>
+  )
+}
+
+export default Axios
