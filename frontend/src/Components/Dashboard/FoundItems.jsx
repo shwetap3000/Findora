@@ -10,7 +10,7 @@ function FoundItems() {
     useEffect(() => {
         const fetchFoundItems = async () => {
             try {
-                const response = await axios.get("http://127.0.0.1:8000/found/");
+                const response = await axios.get("http://127.0.0.1:8000/found/get_found_items/");
                 setFoundItems(response.data);
 
             } catch (error) {

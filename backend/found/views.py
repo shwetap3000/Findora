@@ -6,13 +6,23 @@ from .serializers import FoundSerializer
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
 
+# view to get data from the database
 @api_view(['GET'])
-def FoundView(request):
+def getFoundItemsView(request):
     if (request.method == 'GET'):
         found_items = Found.objects.all()
         serializers = FoundSerializer(found_items, many=True)
 
         return Response(serializers.data, status=status.HTTP_200_OK)
 
-# def FoundView(request):
-#     return HttpResponse('<h2>Found Page</h2>')
+# view to get data from the frontend and save it in the database
+@api_view(['POST'])
+def addFoundItemsView(request):
+    serializer = FoundSerializer(data = request.data)
+
+    if serializer.is_valid():
+        serializer.save()
+        return Response(serializer.data, status=status.HTTP_201_CREATED)
+    
+    print(serializer.errors)
+    return Response(serializer.errors, status=status.HTTP_308_PERMANENT_REDIRECT)

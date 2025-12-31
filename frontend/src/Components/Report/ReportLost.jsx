@@ -83,6 +83,7 @@ function ReportLost() {
           <input
             type="text"
             className="form-input"
+            placeholder="Enter the title of the item"
             // keep this name same as fields name in backend (django models) to avoid error while sending data to backend
             {...register("title", {
               required: "Please enter the title of the item.",
