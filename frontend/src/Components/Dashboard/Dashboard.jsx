@@ -17,8 +17,6 @@ function Dashboard() {
 
   // This should be inside the funciton component
   const items = sortedItems();
-  // console.log(items);
-
 
   // state variable to store the current value to be display
   const [clicked, setClicked] = useState("all");
@@ -77,6 +75,11 @@ function Dashboard() {
             <h4>Found Items</h4>
           </div>
         </button>
+      </div>
+
+      <div className="search-box-wrapper">
+        <p>Search Your Item here...</p>
+        <input type="text" placeholder="Search item..." className="search-box" />
       </div>
 
       {/* passed items and displayItems as props */}

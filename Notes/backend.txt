@@ -1,0 +1,119 @@
+--> USER AUTHENTICATION SYSTEM 
+
+Authentication - The process of verifying the identity of a user or system.
+Authorization - The process of determining what an authenticated user or system is allowed to do.
+
+
+
+--> WITH AUTH
+Only logged-in users can:
+Report items
+Delete/edit their own reports
+
+Backend can say:
+“This item belongs to User #23.
+This request came from User #23.
+- Allowed.”
+
+
+
+--> THINGS TO BUILD FOR AUTHENTICATION
+
+1. User Registration
+   - Collect user information (username, password, email).
+   - Validate input data.
+   - Store user data securely in the database.
+2. User Login
+   - Verify user credentials.
+
+
+
+--> PUBLIC STATE VS AUTHENTICATED STATE
+
+Public State (Before Login): User is a visitor.
+
+    What the user can do:
+    View lost items
+    View found items
+    Search items
+    Open item details
+
+    What frontend shows:
+    Login button
+    Register button
+    “Report Item” -> Redirect to login
+    “Delete/Edit” -> Hidden or disabled
+
+    What backend assumes:
+    “I don’t know who this is.”
+
+
+Authenticated State (After Login): User is logged in (known identity).
+
+    What the user can do:
+    View lost items
+    View found items
+    Search items
+    Open item details
+    Report lost/found items
+    Delete/Edit their own reports
+
+    What frontend shows:
+    Logout button
+    Profile button
+    “Report Item” -> Opens report form
+    “Delete/Edit” -> Visible for own reports
+
+    What backend assumes:
+    “This is User #X.”
+
+
+
+
+--> CONTROLLING UI BEFORE & AFTER LOGIN
+
+1. Core Idea:
+    - UI is controlled by STATE, not by pages.
+    - Login does NOT magically change UI.
+    - A single piece of state changes and React re-renders everything.
+
+2. The One State that Controls Everything:
+    - Entire app's UI changes based on one boolean idea
+    - Conceptually:
+        true → Logged in UI
+        false → Guest UI
+    - This auth state must live in a place where:
+        All components can access it
+        It survives page navigation
+
+
+
+
+
+--> JWT (JSON Web Token) BASICS:
+
+1. What problem does JWT solve ?
+- HTTP is stateless.
+- Server does not remember who you are between requests. The backend forgets you immediately after sending a response.
+- Need a way to prove identity on each request.
+- JWT is one solution to this problem.
+
+
+2. Traditional way - Session based
+- Server stored session data in memory / DB
+- Browser stored a session ID (cookie)
+- Every request → browser sends session ID
+- Server looks it up
+
+    Problems:
+        Hard to scale
+        Server memory increases with users
+        Not ideal for mobile apps / APIs
+
+
+3. What is JWT?
+- JWT (JSON Web Token) is a self-contained digital identity card that the backend gives to the user after login.
+- The frontend sends this card with every request to prove:
+“Hey backend, this is me. I already logged in.”
+- JWT is a compact, URL-safe token that contains encoded JSON data.
+- JWT is created ONLY AFTER LOGIN / SIGNUP
