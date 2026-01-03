@@ -3,10 +3,12 @@ import "./App.css";
 import PrivateView from "./Components/Views/PrivateView";
 import PublicView from "./Components/Views/PublicView";
 import Login from "./Components/Auth/Login";
+import SignUp from "./Components/Auth/SignUp";
 
 function App() {
   return (
-    <Login />
+    // <Login />
+    <SignUp />
   )
 }
 

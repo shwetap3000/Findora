@@ -64,8 +64,8 @@ function Login() {
               {...register("password", {
                 required: "Please enter your password.",
                 maxLength: {
-                  value: 15,
-                  message: "Password cannot exceed 15 characters.",
+                  value: 20,
+                  message: "Password cannot exceed 20 characters.",
                 },
                 minLength: {
                   value: 6,
