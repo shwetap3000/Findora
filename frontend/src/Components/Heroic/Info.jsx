@@ -3,6 +3,8 @@ import '../../Styles/Info.css'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser, faThumbsUp, faBell } from "@fortawesome/free-solid-svg-icons";
 
+// here we will fetch the data from the backend and display it in the info cards
+
 
 function Info() {
 

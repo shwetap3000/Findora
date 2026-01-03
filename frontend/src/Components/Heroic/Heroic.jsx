@@ -15,4 +15,4 @@ function Heroic() {
   )
 }
 
-export default Heroic
+export default Heroic;

@@ -1,38 +1,29 @@
-import React from "react";
-import Navbar from "./Components/Common/Navbar";
-import Heroic from "./Components/Heroic/Heroic";
-import Profile from "./Components/Profile/Profile";
-import Dashboard from "./Components/Dashboard/Dashboard";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Report from "./Components/Report/Report";
-import Footer from "./Components/Common/Footer";
-import './App.css'
+import { useState } from "react";
+import "./App.css";
+import PrivateView from "./Components/Views/PrivateView";
+import PublicView from "./Components/Views/PublicView";
+import Login from "./Components/Auth/Login";
 
 function App() {
   return (
-
-    // here we will use the fragment instead of Router as we have already used the BrowserRouter in our main.jsx
-    
-    <div className="page">
-      <main className="content">
-        <Navbar />
-
-      <Routes>
-        <Route path="/" element={<Heroic />} />
-        <Route path="/dashboard" element={<Dashboard />} />
-        <Route path="/report" element={<Report />} />
-        <Route path="/profile" element={<Profile />} />
-      </Routes>
-
-      <Footer />
-      </main>
-    </div>
-  );
+    <Login />
+  )
 }
 
-export default App;
+export  default App
 
 
+// function App() {
+//   const [isLoggedIn, setIsLoggedIn] = useState(true);
+
+//   return (
+//     // here we will use the fragment instead of Router as we have already used the BrowserRouter in our main.jsx
+
+//     <>{isLoggedIn === true ? <PrivateView /> : <PublicView />}</>
+//   );
+// }
+
+// export default App;
 
 // import React from 'react'
 // import Axios from './Components/Axios'

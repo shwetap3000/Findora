@@ -1,0 +1,14 @@
+1) BrowserRouter
+    --> BrowserRouter is a component from the react-router-dom library.
+   --> Use BrowserRouter in main.jsx to wrap the App component for routing.
+   --> Use to manage navigation and URL handling in a React application.
+   --> Contains three main components: Routes,  Route, Link.
+
+   --> Routes: Container for all Route components.
+   --> Route: Defines a mapping between a URL path and a component to render.
+        --> Example: <Route path="/login" element={<Login />} />
+    --> Link: Used to create navigation links that change the URL without reloading the page.
+        --> Example: <Link to="/about">About</Link> 
+    
+
+

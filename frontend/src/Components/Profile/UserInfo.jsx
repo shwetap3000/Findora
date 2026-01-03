@@ -3,9 +3,12 @@ import UserImg from "../../assets/test-account.jpg";
 import "../../Styles/UserInfo.css";
 
 function UserInfo() {
+
+  // Dummy user data
   const UserData = [{ id: 1, name: "John Doe", email: "johndoe@gmail.com" }];
 
   const handleLogout = () => {
+    // here we will make a logout request to the backend and clear the user session
     alert("Logout successfully!");
   };
 

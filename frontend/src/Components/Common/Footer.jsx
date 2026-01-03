@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 function Footer() {
   return (
-    <div className="footer-wrapper">
+    <footer className="footer-wrapper">
       <h3>Findora</h3>
       <p>Helping you recover what matters !</p>
 
@@ -24,7 +24,7 @@ function Footer() {
       <div className="footer-bottom">
         © 2025 Findora. All rights reserved.
       </div>
-    </div>
+    </footer>
   );
 }
 

@@ -4,6 +4,7 @@ import Cards from "./Cards";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowRight, faArrowLeft } from "@fortawesome/free-solid-svg-icons";
 
+// data for features cards 
 const features = [
   {
     id: 1,
@@ -72,6 +73,7 @@ function Features() {
       </button>
 
       <div className="feature-cards">
+        {/* passing data to Cards component */}
         <Cards data={features[currIndex]} />
       </div>
 

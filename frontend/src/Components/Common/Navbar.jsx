@@ -16,6 +16,8 @@ function Navbar() {
 
   return (
     <div>
+
+      {/* always visible */}
       <nav className="nav-wrapper">
         <Link to="/" className="first-link">
           <img src={navlogo} alt="nav-logo" className="nav-logo" />
@@ -39,6 +41,7 @@ function Navbar() {
 
         {isOpen && (
           <div className="nav-links-wrapper">
+            {/* onClick function to close the menu when any of the links clicked */}
             <div className="nav-links"  onClick={() => setIsOpen(false)}>
               <Link to="/" className="link" >
                 Home

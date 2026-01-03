@@ -11,6 +11,9 @@ function WelcomeCard() {
         Let's find what matters.
       </p>
 
+
+      {/* here we will manage the navigation to the report item page or login page based on authentication status */}
+      
       <Link to='/report' className="card-link">
       <button className="card-btn">Report Item </button>
       </Link>

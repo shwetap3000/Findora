@@ -1,6 +1,7 @@
 import React from 'react'
 import '../../Styles/Features.css'
 
+// data is being passed as props from Features.jsx
 function Cards({data}) {
   return (
     <div className='feature-card'>
@@ -10,4 +11,4 @@ function Cards({data}) {
   )
 }
 
-export default Cards
+export default Cards;

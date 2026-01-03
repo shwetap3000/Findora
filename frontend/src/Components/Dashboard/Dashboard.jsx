@@ -9,13 +9,13 @@ import {
 import ItemCard from "./ItemCard";
 import sortedItems from "./Items";
 
-// // Array of objects of all the items
-// for static data
+// // Array of objects of all the items - (for static data)
+// // import from "./Items";
 // const items = Items;
 
 function Dashboard() {
 
-  // This should be inside the funciton component
+  // This should be inside the function component
   const items = sortedItems();
 
   // state variable to store the current value to be display
@@ -48,6 +48,9 @@ function Dashboard() {
     <div>
       <h1 className="dashboard-main-heading">Item Dashboard</h1>
 
+      {/* buttons to filter items */}
+
+      {/* button to display all items */}
       <div className="btns-wrapper">
         <button className="all-items-btn" onClick={handleAllBtnClick}>
           <div className="btn-wrapper">
@@ -59,6 +62,7 @@ function Dashboard() {
           </div>
         </button>
 
+        {/* button to display lost items */}
         <button className="lost-items-btn" onClick={handleLostBtnClick}>
           <div className="btn-wrapper">
             <FontAwesomeIcon
@@ -69,6 +73,7 @@ function Dashboard() {
           </div>
         </button>
 
+        {/* button to display found items */}
         <button className="found-items-btn" onClick={handleFoundBtnClick}>
           <div className="btn-wrapper">
             <FontAwesomeIcon icon={faMapPin} style={{ color: "green" }} />
@@ -77,6 +82,7 @@ function Dashboard() {
         </button>
       </div>
 
+      {/* search box */}
       <div className="search-box-wrapper">
         <p>Search Your Item here...</p>
         <input type="text" placeholder="Search item..." className="search-box" />

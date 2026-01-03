@@ -7,6 +7,10 @@ import {
   faList,
 } from "@fortawesome/free-solid-svg-icons";
 
+
+// here we will fetch the reported items of the logged in user from the backend and display them (data that user has reported)
+
+// Dummy data for reported items
 const LostItems = [
   {
     id: 1,

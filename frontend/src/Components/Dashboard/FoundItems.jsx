@@ -1,4 +1,4 @@
-// Dynamic daata fetching from backend API
+// Dynamic data fetching from backend API
 
 import React, { useEffect, useState } from 'react'
 import axios from 'axios';
@@ -7,6 +7,7 @@ function FoundItems() {
 
     const [foundItems, setFoundItems] = useState([]);
 
+    // function to fetch found items from the backend API using axios
     useEffect(() => {
         const fetchFoundItems = async () => {
             try {
