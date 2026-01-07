@@ -152,7 +152,7 @@ function SignUp() {
           </div>
 
           <button type="submit" className="submit-btn">
-            Submit
+            Create Account
           </button>
 
           <hr className="form-divider"/>

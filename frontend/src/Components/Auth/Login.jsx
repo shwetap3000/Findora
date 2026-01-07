@@ -105,6 +105,10 @@ function Login() {
         <button type="submit" className="submit-btn">
           Login
         </button>
+
+        <hr className="form-divider" />
+        <p>Don't have an account?</p>
+        <Link to="/signup">Sign Up</Link>
       </form>
     </div>
   );
