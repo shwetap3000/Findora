@@ -1,3 +1,118 @@
+```python
+from rest_framework import serializers
+
+# this line import django's built-in function authenticate that checks if a user's login details are correct or not
+# it already knows how to find the user, check the password and return the user if everything is correct
+from django.contrib.auth import authenticate
+
+# importing UserModel
+from .models import UserModel
+
+
+# =========================
+# SIGNUP SERIALIZER
+# =========================
+
+
+class RegisterSerializer(serializers.ModelSerializer):
+
+    # the api must accept a password otherwise signup is impossible but in our model we did not manually define password, it comes internally from AbstractUser and we should never expose it or return it, so we define password only in hte serializer as an input field
+
+    # serializers.CharField expect text input and validate it as a string and raise error if input is not valid
+    # so this line tells DRF that the signup api expexts a text field called password
+
+    # write_only=True means the client can send password but api will never return passwors in response (password is hidden for security)
+
+    # We did not manually create a password field in the model because Django’s AbstractUser already provides a secure password field and authentication system, which is present internally and stores the hashed passwords only (creating password field manually can store the password as plain text and this could be dangerous). The serializer temporarily accepts the password as input, and create_user() safely hashes and stores it in the existing model field.
+    password = serializers.CharField(write_only=True)
+
+
+    # this is a configuration class that tells the serializer which model to use and which fields to accept
+    class Meta:
+
+        # connect this serializer to UserModel (means data will be saved in db and validation is based on UserModel fields)
+        model = UserModel
+
+        # only fields allowed during signup and prevents unwanted fields from being passed. Keeps the api clean and secure
+        fields = ['email', 'username', 'password']
+
+    def create(self, validated_data):
+
+        # we override default .create() with .create_user() bcoz .create() stores the password in plan text whereas .create_user() hashes the password and sets proper auth fields
+
+        # validated_data contains cleaned and validated input, it comes after is_valid() is called (in views). Data is safe to use here
+        user = UserModel.objects.create_user(
+            email=validated_data['email'],
+            username=validated_data['username'],
+
+            # the serializer does not save password directly, it passes password to this line and this line stores it safely in the model's password field
+            password=validated_data['password']
+        )
+
+        # returns the newly created user. DRF uses this object for response and for further processing
+        return user
+
+
+# =========================
+# LOGIN SERIALIZER
+# =========================
+
+# this is a normal serializer and not a model serializer bcoz login does not create or update a model, we only accept credentials and verify them (no database involvement)
+class LoginSerializer(serializers.Serializer):
+
+    # expects a valid email format. Automatically validates email structure, domain, etc. This is input only
+    email = serializers.EmailField()
+
+    # accept password as text. password is accepte but is neve returned in response
+    password = serializers.CharField(write_only=True)
+
+
+    # here django calls authenticate built-in function and find user by email, hashes the entered password and compare with the stored hash. If valid then returns the user object else returns none 
+    # here data is a dictionary and it contains validated input fields
+    def validate(self, data):
+        user = authenticate(
+            email=data['email'],
+            password=data['password']
+        )
+
+
+        # this handles the invalid credentials. If auth fails then this raise an error and serializer becomes invalid
+        if not user:
+            raise serializers.ValidationError("Invalid credentials")
+
+        # adding the validate user into the dictionary (data)
+        # this line attaches the authenticated user object to the validated data so the view can access it and complete the login process (like generating tokens)
+        data['user'] = user
+        return data
+
+```
+
+Model → defines what is stored
+Serializer → defines what data is accepted and returned by the API
+
+So a serializer can:
+have fields that don’t exist in the model
+ignore some model fields
+control input/output behavior
+
+> We create model fields to store data in the database.
+We create serializers to convert data between Python objects and JSON and to validate input. 
+We created a temporary password field in the serializer so the frontend can show a password input.
+The serializer only validates the password, it does not store it directly.
+The password is then passed to create_user(), which hashes the password and stores it securely in the database.
+
+> When we use AbstractUser, the password field already exists internally in the model, so we must NOT redefine it.
+Redefining it can cause serious problems like overriding Django’s secure password handling or storing passwords in plain text.
+Therefore, we create a temporary password field in the serializer.
+This field is only used to accept and validate the password entered by the user.
+Once validation passes, the serializer sends the password to create_user(), which hashes the password and stores it in the already-existing password field in the database.
+
+
+
+
+
+
+
 # Serializers
 ---
 
@@ -95,7 +210,7 @@ This prevents:
 
 ## 3️⃣ Validate data (MOST IMPORTANT)
 
-Serializer is your **security guard** 🚨
+Serializer is your **security guard** 
 
 It checks:
 * required fields
@@ -110,8 +225,8 @@ Example:
 email = serializers.EmailField()
 ```
 
-✔ valid email required
-❌ random string rejected
+ valid email required
+ random string rejected
 
 ---
 
@@ -122,13 +237,12 @@ Serializer decides:
 * what goes **OUT**
 
 Example:
-
 ```python
 password = serializers.CharField(write_only=True)
 ```
 
-✔ password accepted
-❌ password never sent in response
+ password accepted
+ password never sent in response
 
 ---
 
@@ -395,7 +509,7 @@ Examples:
 
 ---
 
-## 🧠 One-line summary (exam + interview ready)
+## One-line summary
 
 > **Yes, serializers can be created without models.
 > They are used when data is required only for validation and processing (like login, password change, token handling) and does not need to be stored in the database.**

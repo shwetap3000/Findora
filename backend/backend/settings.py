@@ -36,7 +36,7 @@ INSTALLED_APPS = [
     'accounts',
     'lost',
     'found',
-    'jazzmin',
+    # 'jazzmin',
 
     'corsheaders',  # Added for handling CORS
     'django.contrib.admin',
