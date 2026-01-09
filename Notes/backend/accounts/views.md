@@ -67,3 +67,27 @@ class LoginView(APIView):
 
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 ```
+
+
+```python
+
+# this line ask SimpleJWT to create a jwt token set for this (authenticated) user
+# internally simpleiwt takes the user's id, adds expiry time, signs it with secret key, builds a refresh token and inside it also creates an access token
+# so after this line 'refresh' is an object that contains a refresh token and also an ancess token
+refresh = RefreshToken.for_user(user)
+
+    # sending everything back to frontend
+    return Response({
+
+        # str converts the refresh token object into the actual token string like : eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9....
+        "access": str(refresh.access_token),
+        "refresh": str(refresh),
+
+        # this is not authentication, it just allows frontend to instantly know who logged in, what username to show, etc..
+        "user": {
+            "id": user.id,
+            "email": user.email,
+            "username": user.username
+        }
+    }, status=status.HTTP_200_OK)
+```

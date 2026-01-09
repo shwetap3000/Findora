@@ -26,7 +26,7 @@ class Profile(models.Model):
     verified = models.BooleanField(default=False)
 
     def __str__(self):
-        return self.full_name 
+        return self.user.username
     
 
 # signal function
