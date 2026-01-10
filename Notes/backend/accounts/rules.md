@@ -1062,12 +1062,220 @@ We will:
 ---
 ---
 
-## NEXT LOGICAL STEP (DON’T SKIP)
+## CHUNK 1: WHAT DOES “PROTECT AN API” MEAN?
 
-Now that token exists, next we must:
-➡️ **Use token to protect APIs**
-➡️ Learn `IsAuthenticated`
-➡️ Send token in headers
+Right now:
+* Anyone can call any API
+* Even without login
 
-Say:
-**“Protect an API using JWT (step by step)”**
+We want:
+> Only users with a **valid JWT token** can access certain APIs
+
+So:
+```
+No token  →  blocked  
+Bad token →  blocked  
+Valid token →  allowed
+```
+
+That’s **authentication**.
+
+---
+
+## CHUNK 2: HOW JWT AUTHENTICATION WORKS IN DRF
+
+When a request comes in with this header:
+
+```
+Authorization: Bearer <JWT_TOKEN>
+```
+
+DRF will:
+1. Extract the token
+2. Decode it
+3. Verify signature
+4. Check expiry
+5. Find user inside payload
+6. Set `request.user`
+
+So inside your view:
+
+```python
+request.user
+```
+
+will be the **logged-in user**
+
+---
+
+## CHUNK 3: TURN ON JWT GLOBALLY
+
+We already added:
+
+```python
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    ),
+}
+```
+
+This tells Django:
+> “Use JWT to authenticate every request”
+
+But this alone does NOT block anyone.
+
+---
+
+## CHUNK 4: THE LOCK = PERMISSIONS
+
+To block anonymous users we use:
+
+```python
+from rest_framework.permissions import IsAuthenticated
+```
+
+This means:
+> “Only allow requests where request.user is valid”
+
+---
+
+## CHUNK 5: CREATE A PROTECTED API
+
+Let’s create a test API:
+
+### `accounts/views.py`
+
+```python
+from rest_framework.decorators import api_view, permission_classes
+from rest_framework.permissions import IsAuthenticated
+from rest_framework.response import Response
+
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+def profile_view(request):
+    user = request.user
+
+    return Response({
+        "id": user.id,
+        "email": user.email,
+        "username": user.username
+    })
+```
+
+---
+
+## CHUNK 6: WHAT THESE LINES MEAN
+
+### `@permission_classes([IsAuthenticated])`
+
+This is the lock 
+
+Without a valid token:
+```
+401 Unauthorized
+```
+
+With a valid token:
+```
+request.user = real user
+```
+
+---
+
+## CHUNK 7: ADD URL
+
+`accounts/urls.py`
+
+```python
+from .views import profile_view
+
+urlpatterns = [
+    path('login/', login_user),
+    path('profile/', profile_view),
+]
+```
+
+---
+
+## CHUNK 8: HOW TO TEST 
+
+### Step 1: Login
+
+Get access token
+
+```json
+{
+  "access": "eyJhbGciOi..."
+}
+```
+
+---
+
+### Step 2: Open profile API
+
+Click **Headers** tab in DRF
+
+Add:
+
+```
+Key: Authorization
+Value: Bearer <your_access_token>
+```
+
+Example:
+
+```
+Authorization: Bearer eyJhbGciOi...
+```
+
+---
+
+### Step 3: Click GET
+
+You get:
+
+```json
+{
+  "id": 1,
+  "email": "test@gmail.com",
+  "username": "testuser"
+}
+```
+
+---
+
+## CHUNK 9: TRY WITHOUT TOKEN
+
+Remove header → GET →
+
+```json
+{
+  "detail": "Authentication credentials were not provided."
+}
+```
+
+This proves:
+> JWT is protecting the API
+
+---
+
+## BIG PICTURE (VERY IMPORTANT)
+
+You just built:
+
+```
+Signup → Login → Token → Protected API
+```
+
+This is **exactly** how:
+* Instagram
+* Gmail
+* Netflix
+* Amazon
+
+work (internally).
+
+---
+
+
