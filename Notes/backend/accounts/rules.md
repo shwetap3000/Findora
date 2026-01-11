@@ -27,14 +27,12 @@ Just **identity**.
 
 ## CHUNK 1: WHY AUTH IS NEEDED (real-world analogy)
 
-Imagine a college library.
-
+Imagine a college library:
 * Anyone can **enter** the library
 * Only students can **borrow books**
 * Only admins can **manage records**
 
 So the librarian must know:
-
 * Who are you?
 * Are you allowed?
 
@@ -49,7 +47,6 @@ This is the most important mental model.
 ### HTTP is stateless
 
 Each request is independent:
-
 ```
 Request 1 → server
 Request 2 → server
@@ -77,7 +74,6 @@ Let’s kill a common misconception.
 1. You send credentials
 2. Server verifies them
 3. Server says:
-
    > “Yes, you are real”
 
 That’s it.
@@ -1275,6 +1271,199 @@ This is **exactly** how:
 * Amazon
 
 work (internally).
+
+---
+---
+
+Now we connect the **last two missing pieces** of real-world authentication:
+
+> **Refresh Token** and **Logout**
+
+These are what make JWT usable in real applications like Instagram, Gmail, etc.
+
+---
+
+## CHUNK 1: THE PROBLEM JWT CREATES
+
+You remember:
+* Access token has **short life** (5–15 min)
+
+Why?
+* If stolen → damage limited
+
+But that creates a problem:
+> User would have to log in every 5 minutes 
+That would be unusable.
+
+So we need a way to:
+> Get a new access token **without re-entering password**
+
+That’s where **refresh token** comes in.
+
+---
+
+## CHUNK 2: WHAT A REFRESH TOKEN IS
+
+A refresh token is:
+* Long-lived
+* Also a JWT
+* More powerful than access token
+
+It is used **only for one thing**:
+
+> To get a new access token
+
+It is **NOT** sent to normal APIs.
+
+---
+
+## CHUNK 3: REAL-WORLD FLOW
+
+Let’s simulate a user:
+
+1️⃣ Login
+User receives:
+
+```
+access_token (5 min)
+refresh_token (1 day)
+```
+
+2️⃣ User makes API requests using access token
+
+3️⃣ After 5 minutes:
+
+```
+Access token expires
+```
+
+4️⃣ Frontend sends refresh token to:
+
+```
+/token/refresh/
+```
+
+5️⃣ Server returns:
+
+```
+new access token
+```
+
+6️⃣ User continues — no login screen
+
+That’s how apps feel “always logged in”.
+
+---
+
+## CHUNK 4: SIMPLEJWT ALREADY GIVES THIS API
+
+We don’t write this ourselves.
+
+In `urls.py` (project level):
+
+```python
+from rest_framework_simplejwt.views import TokenRefreshView
+
+urlpatterns = [
+    ...
+    path('token/refresh/', TokenRefreshView.as_view()),
+]
+```
+
+---
+
+## CHUNK 5: HOW REFRESH WORKS (REQUEST)
+
+```json
+{
+  "refresh": "eyJhbGciOi..."
+}
+```
+
+---
+
+### Response
+
+```json
+{
+  "access": "new_access_token_here"
+}
+```
+
+No password
+No user lookup
+Just cryptographic verification
+
+---
+
+## CHUNK 6: WHAT LOGOUT MEANS IN JWT
+
+This is very important:
+
+> JWT is stateless
+> Server does not store sessions
+
+So technically:
+Server cannot “delete” a token
+
+So what is logout?
+
+---
+
+## CHUNK 7: LOGOUT IN JWT SYSTEM
+
+Logout means:
+> Client deletes its tokens
+
+When:
+* access token is deleted
+* refresh token is deleted
+
+Then:
+* User is effectively logged out
+* No valid token → no access
+
+---
+
+## CHUNK 8: WHAT ABOUT SECURITY?
+
+If someone steals a refresh token, it is dangerous.
+
+So in serious systems we use:
+* Token blacklisting
+* Rotation
+* Logout invalidation
+
+SimpleJWT supports this, but we won’t add it yet.
+
+Right now we focus on **core understanding**.
+
+---
+
+## CHUNK 9: YOUR FULL AUTH FLOW (COMPLETE)
+
+You have now built:
+
+```
+1) Signup → creates user
+2) Login → returns access + refresh
+3) Access token → used to access protected APIs
+4) Refresh token → gets new access token
+5) Logout → delete tokens on frontend
+```
+
+This is a **complete modern authentication system**.
+
+---
+
+## FINAL BIG REALIZATION
+
+JWT is not “login system”.
+
+JWT is:
+> A way to prove identity **without server memory**
+
+Everything you’ve done fits that.
 
 ---
 

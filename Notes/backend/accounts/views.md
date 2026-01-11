@@ -69,6 +69,9 @@ class LoginView(APIView):
 ```
 
 
+
+
+
 ```python
 
 # this line ask SimpleJWT to create a jwt token set for this (authenticated) user
@@ -90,4 +93,36 @@ refresh = RefreshToken.for_user(user)
             "username": user.username
         }
     }, status=status.HTTP_200_OK)
+```
+
+
+
+
+
+```python
+
+# permission_classes tells django that 'who is allowed to access this api?'
+# without permission classes anyone on the internet can call this api even without login and without token
+# it only allow requests that have a valid jwt token and a real logged in user (private api)
+# tells : 'before running this api, check who is allowed and who is blocked
+from rest_framework.decorators import api_view, permission_classes
+
+# this is a gatekeeper, it means only allow the api if it comes from the logged-in user and the request must contain a valid access token
+from rest_framework.permissions import IsAuthenticated
+
+from rest_framework.response import Response
+
+@api_view(['GET'])
+
+# this is the lock on the api door
+# this api can only be accessed by user who send a valid access token
+@permission_classes([IsAuthenticated])
+def profile_view(request):
+    user = request.user
+
+    return Response({
+        "id": user.id,
+        "email": user.email,
+        "username": user.username
+    })
 ```
