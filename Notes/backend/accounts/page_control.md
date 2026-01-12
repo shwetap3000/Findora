@@ -1,4 +1,189 @@
-# The “private vs public pages” in React.
+# Big Picture (What we have built)
+
+We currently have:
+
+| Layer                 | We built |
+| --------------------- | --------- |
+| Django User model     | ✅         |
+| Register API          | ✅         |
+| Login API             | ✅         |
+| JWT token system      | ✅         |
+| Protected Profile API | ✅         |
+
+Now React becomes the **client**.
+
+---
+
+## Full Stack Authentication Flow
+
+This is how app will work when it is live:
+
+```
+User opens website
+↓
+React shows Login / Signup
+↓
+User enters email & password
+↓
+React sends request to Django
+↓
+Django returns JWT
+↓
+React stores JWT
+↓
+Every future API request sends JWT
+↓
+Django identifies user from JWT
+```
+
+No sessions.
+No server memory.
+Stateless & scalable.
+
+---
+
+#  Step-by-Step Frontend Flow
+
+## 1️⃣ User signs up
+
+React sends:
+```
+POST /accounts/register/
+```
+
+Body:
+```json
+{
+  "email": "...",
+  "username": "...",
+  "password": "..."
+}
+```
+
+Backend:
+* Creates user
+* Hashes password
+* Creates profile
+
+React:
+* Shows “Account created”
+* Redirects to login
+
+---
+
+## 2️⃣ User logs in
+
+React sends:
+```
+POST /accounts/login/
+```
+
+Backend returns:
+```json
+{
+  "access": "...",
+  "refresh": "..."
+}
+```
+
+React now:
+```js
+localStorage.setItem("access", token)
+localStorage.setItem("refresh", refresh)
+```
+
+This is how the browser remembers login.
+
+---
+
+## 3️⃣ User visits dashboard
+
+React sends:
+```
+GET /accounts/profile/
+```
+
+With header:
+```
+Authorization: Bearer <access_token>
+```
+
+Backend:
+* Decodes token
+* Sets `request.user`
+* Returns profile
+
+React:
+* Shows username, email, etc
+
+---
+
+## 4️⃣ Any API call (posts, orders, chats…)
+
+React always sends:
+```
+Authorization: Bearer <token>
+```
+
+So Django always knows:
+> who is making the request
+
+---
+
+# 🔁 Token Expiry (Very important)
+
+Your access token expires (ex: 5 minutes).
+
+So when Django sends:
+```
+401 Unauthorized
+```
+
+React will:
+```
+POST /token/refresh/
+```
+
+with refresh token → get new access token → retry original request.
+
+User stays logged in without knowing.
+
+This is how Netflix, Amazon, etc do auth.
+
+---
+
+## Logout
+
+React simply deletes tokens:
+
+```js
+localStorage.clear()
+```
+
+Backend doesn’t need to do anything.
+
+JWT is stateless.
+
+---
+
+## What makes this a **real full-stack project**
+
+You now have:
+
+| Thing       | Why companies love it  |
+| ----------- | ---------------------- |
+| JWT         | Scalable               |
+| No sessions | Cloud friendly         |
+| Token auth  | Works with mobile apps |
+| DRF + React | Industry standard      |
+
+This is **not a toy project** — this is how SaaS products are built.
+
+---
+---
+
+
+# The Private vs Public pages” in React.
 ---
 
 ## 1️⃣ Concept: Pages vs Routes
@@ -16,7 +201,7 @@ So the “record” of which routes are private or public is **managed in your R
 
 ---
 
-# **2️⃣ How to manage it in React**
+## 2️⃣ How to manage it in React
 
 ### Step 1: Store authentication state
 
@@ -94,11 +279,9 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 </Router>
 ```
 
-✅ This is how you **keep track of private vs public pages** in your frontend.
-
 ---
 
-# **3️⃣ Important notes**
+## 3️⃣ Important notes
 
 1. Even with private routes in frontend, **backend must still verify tokens**.
 
@@ -116,7 +299,7 @@ Then use it for `map` or `switch` in your routing system.
 
 ---
 
-# **Summary**
+## Summary
 
 * **Frontend** → manages which routes require login (`PrivateRoute`)
 * **Backend** → manages which APIs require login (`IsAuthenticated`)
@@ -126,14 +309,7 @@ Then use it for `map` or `switch` in your routing system.
 > This is exactly how apps like Instagram, LinkedIn, and Netflix manage private vs public pages.
 
 ---
-
-If you want, I can **draw a full flow diagram showing: Login → store token → private route → call API → backend check** — it usually makes everything click visually.
-
-Do you want me to draw that?
-
-
-
-
+---
 
 
 ### 1️⃣ Frontend controls **private vs public pages**
@@ -176,15 +352,4 @@ Do you want me to draw that?
 4. If token is invalid → backend returns 401 → React redirects to login
 
 ---
-
-### ✅ Key point
-
-> Frontend handles **which pages are private**.
-> Backend handles **which APIs are protected**.
-> Token is the bridge that proves a user is logged in.
-
 ---
-
-If you want, I can make a **small diagram showing tokens, frontend pages, and backend APIs** — it will make this completely visual and easy to remember.
-
-Do you want me to make that?

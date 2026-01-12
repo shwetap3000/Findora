@@ -1,18 +1,50 @@
-import { useState } from "react";
 import "./App.css";
-import PrivateView from "./Components/Views/PrivateView";
-import PublicView from "./Components/Views/PublicView";
-import Login from "./Components/Auth/Login";
-import SignUp from "./Components/Auth/SignUp";
+import Views from "./Components/Views/Views";
 
 function App() {
   return (
-    // <Login />
-    <SignUp />
+    <div>
+      <Views />
+    </div>
   )
 }
 
-export  default App
+export default App
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// function App() {
+//   return (
+//     // <Login />
+//     <SignUp />
+//   )
+// }
+
+// export  default App
 
 
 // function App() {
@@ -26,6 +58,8 @@ export  default App
 // }
 
 // export default App;
+
+
 
 // import React from 'react'
 // import Axios from './Components/Axios'
