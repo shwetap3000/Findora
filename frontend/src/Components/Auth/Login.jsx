@@ -1,115 +1,106 @@
-import React, { useState } from "react";
 import { useForm } from "react-hook-form";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 import "../../Styles/Login.css";
+import "../../Styles/Report.css";
+import axios from "axios";
 
 function Login() {
-  // state to handle password visibility
-  const [isPasswordVisible, setIsPasswordVisible] = useState(false);
-
-  // function to toggle password visibility
-  const handlePasswordVisibility = () => {
-    setIsPasswordVisible(!isPasswordVisible);
-  };
-
   const {
     register,
-    handleSubmit,
     reset,
+    handleSubmit,
     formState: { errors },
   } = useForm();
 
-  const onSubmit = (data) => {
-    console.log(data);
+  //   const onSubmit = (data) => {
+  //     alert("Form Submitted successfully");
+  //     console.log(data);
+  //   }
+
+  // sending data to django backend for authentication
+  const onSubmit = async (data) => {
+    // const formData = {
+    //     email: data.email,
+    //     password: data.password
+    // }
+    // const formData = new FormData
+
+    await axios.post(
+      "http://127.0.0.1:8000/accounts/login/",
+      {
+        email: data.email,
+        password: data.password,
+      },
+      {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+
+    // // LoginView url form accounts app
+    // await axios.post('', formData);
+    // alert("Form submitted successfully");
+
+    // console.log(formData);
+    // reset();
   };
 
   return (
-    <div className="login-wrapper">
-      <div className="heading">
-        <h2>Login to Your Account</h2>
-        <p>Welcome back! Please enter your details.</p>
-      </div>
+    <div>
+      <div className="form-wrapper">
+        <form onSubmit={handleSubmit(onSubmit)}>
+          <div className="form-fields">
+            <label className="form-label">
+              Email <sup className="imp-mark">*</sup>
+            </label>
 
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <div className="form-fields">
-          <label className="label-field">
-            Email Address
-            <sup className="imp-mark">*</sup>
-          </label>
-
-          <input
-            type="email"
-            placeholder="Enter your email address"
-            className="form-input"
-            {...register("email", {
-              required: "Please enter your email address.",
-            })}
-          />
-
-          {errors.email && <p className="error-text">{errors.email.message}</p>}
-        </div>
-
-        <div className="form-fields">
-          <label className="label-field">
-            Password
-            <sup className="imp-mark">*</sup>
-          </label>
-
-          <div>
+            {/* registered name must be same as the field name in backend view */}
             <input
-              type={isPasswordVisible ? "text" : "password"}
-              placeholder="Enter your password"
               className="form-input"
-              {...register("password", {
-                required: "Please enter your password.",
-                maxLength: {
-                  value: 20,
-                  message: "Password cannot exceed 20 characters.",
-                },
-                minLength: {
-                  value: 6,
-                  message: "Password should be at least 6 characters long.",
-                },
-
-                // code to check for correct password
+              type="text"
+              {...register("email", {
+                required: "Email is required.",
               })}
             />
 
-            {/* Password visibility toggle */}
-            {/* {isPasswordVisible ? (
-              <FontAwesomeIcon
-                icon={faEye}
-                onClick={handlePasswordVisibility}
-              />
-            ) : (
-              <FontAwesomeIcon
-                icon={faEyeSlash}
-                onClick={handlePasswordVisibility}
-              />
-            )} */}
-
-            <span
-              className="password-toggle"
-              onClick={handlePasswordVisibility}
-            >
-              <FontAwesomeIcon icon={isPasswordVisible ? faEye : faEyeSlash} />
-            </span>
+            {errors.email && (
+              <p className="error-text">{errors.email.message}</p>
+            )}
           </div>
 
-          {errors.password && (
-            <p className="error-text">{errors.password.message}</p>
-          )}
-        </div>
+          <div className="form-fields">
+            <label className="form-label">
+              Password <sup className="imp-mark">*</sup>
+            </label>
 
-        <button type="submit" className="submit-btn">
-          Login
-        </button>
+            <input
+              className="form-input"
+              type="password"
+              {...register("password", {
+                required: "Password is required.",
+                minLength: {
+                  value: 5,
+                  message: "Full Name must be 5 characters long",
+                },
+                maxLength: {
+                  value: 20,
+                  message: "Full Name must not exceed 30 characters",
+                },
+              })}
+            />
 
-        <hr className="form-divider" />
-        <p>Don't have an account?</p>
-        <Link to="/signup">Sign Up</Link>
-      </form>
+            {errors.password && (
+              <p className="error-text">{errors.password.message}</p>
+            )}
+          </div>
+
+          <div>
+            <button type="submit" className="submit-btn">
+              Submit
+            </button>
+          </div>
+        </form>
+      </div>
     </div>
   );
 }

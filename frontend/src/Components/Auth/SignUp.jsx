@@ -1,168 +1,84 @@
-import React, { useState } from "react";
 import { useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
+import "../../Styles/Login.css";
 
 function SignUp() {
-  const [isPasswordVisible, setIsPasswordVisible] = useState(false);
-
-  const [isConfirmPassVisible, setIsConfirmPassVisible] = useState(false);
-
-  const handlePasswordVisibility = () => {
-    setIsPasswordVisible(!isPasswordVisible);
-  };
-
-  const handleConfirmPassVisibility = () => {
-    setIsConfirmPassVisible(!isConfirmPassVisible);
-  }
-
   const {
     register,
-    reset,
     handleSubmit,
-    formState: { errors },
+    reset,
+    formState: {errors},
   } = useForm();
 
   const onSubmit = (data) => {
     console.log(data);
-    reset;
   };
 
   return (
-    <div className="signup-wrapper">
-      <div className="signup-welcome">
-        <Link to="/">Findora</Link>
-        <p>Subheading goes here</p>
-      </div>
+    <div className="form-wrapper">
+      <form onSubmit={handleSubmit(onSubmit)}>
+        <div className="form-fields">
+          <label className="form-label">
+            Username : <sup className="imp-mark">*</sup>
+          </label>
 
-      <div>
-        <div className="sigup-heading">
-          <h2>Create a New Account</h2>
-          <p>Join us today! Please fill in your details.</p>
+          <input 
+          type="text" 
+          className="form-input"
+          {...register('username', {
+            required: 'Username is required.',
+            minLength: {value: 3, message: 'Username must be 3 characters long'},
+            maxLength: {value: 30, message: 'Username cannot excced 30 characters.'},
+          })}
+          />
+
+          {errors.username && (
+            <p className="error-text">{ errors.username.message }</p>
+          ) }
         </div>
 
-        <form onSubmit={handleSubmit(onSubmit)}>
-          <div className="form-fields">
-            <label className="label-field">
-              Full Name
-              <sup className="imp-mark">*</sup>
-            </label>
+        <div className="form-fields">
+          <label className="form-label">
+            Email : <sup className="imp-mark">*</sup>
+          </label>
 
-            <input
-              type="text"
-              placeholder="Enter your full name"
-              className="form-input"
-              {...register("fullName", {
-                required: "Please Enter your full name",
-                maxLength: {
-                  value: 60,
-                  message: "Full Name cannot exceed 60 characters",
-                },
-                minLength: {
-                  value: 5,
-                  message: "Full Name should be atleast 5 characters long",
-                },
-              })}
-            />
+          <input 
+          type="email" 
+          className="form-input"
+          {...register('email', {
+            required: 'Email is required.',
+          })}
+          />
 
-            {errors.fullName && (
-              <p className="error-text">{errors.fullName.message}</p>
-            )}
+          {errors.email && (
+            <p className="error-text">{errors.email.message}</p>
+          )}
+
+        </div>
+
+        <div className="form-fields">
+          <label className="form-label">
+            Password : <sup className="imp-mark">*</sup>
+          </label>
+
+          <input 
+          type="password" 
+          className="form-input"
+          {...register('password', {
+            required: 'Password is required.',
+            minLength: {value: 3, message: 'Password must be 8 characters long'},
+            maxLength: {value: 30, message: 'Password cannot excced 30 characters.'},
+          })}
+          />
+
+          {errors.password && (
+            <p className="error-text">{errors.password.message}</p>
+          )}
+
+          <div>
+            <button className="submit-btn">Submit</button>
           </div>
-
-          <div className="form-fields">
-            <label className="label-field">
-              Email Address
-              <sup className="imp-mark">*</sup>
-            </label>
-
-            <input
-              type="email"
-              placeholder="Enter your email address"
-              className="form-input"
-              {...register("email", {
-                required: "Please Enter your email address",
-              })}
-            />
-
-            {errors.email && (
-              <p className="error-text">{errors.email.message}</p>
-            )}
-          </div>
-
-          <div className="form-fields">
-            <label className="label-field">
-              Password
-              <sup className="imp-mark">*</sup>
-            </label>
-
-            <input
-              type={isPasswordVisible ? "text" : "password"}
-              placeholder="Enter your password"
-              className="form-input"
-              {...register("password", {
-                minLength: {
-                  value: 6,
-                  message: "Password should be at least 6 characters long.",
-                },
-                maxLength: {
-                  value: 20,
-                  message: "Password cannot exceed 20 characters.",
-                },
-              })}
-            />
-
-            <span
-              className="password-toggle"
-              onClick={handlePasswordVisibility}
-            >
-              <FontAwesomeIcon icon={isPasswordVisible ? faEye : faEyeSlash} />
-            </span>
-          </div>
-
-          <div className="form-fields">
-            <label className="label-field">
-              Confirm Password
-              <sup className="imp-mark">*</sup>
-            </label>
-
-            <input
-              type={isConfirmPassVisible ? "text" : "password"}
-              placeholder="Enter your confirm password"
-              className="form-input"
-              {...register("confirm-password", {
-                minLength: {
-                  value: 6,
-                  message: "Confirm password should be at least 6 characters long.",
-                },
-                maxLength: {
-                  value: 20,
-                  message: "Confirm password cannot exceed 20 characters.",
-                },
-              })}
-            />
-
-            <span
-              className="confirmPass-toggle"
-              onClick={handleConfirmPassVisibility}
-            >
-              <FontAwesomeIcon icon={isConfirmPassVisible ? faEye : faEyeSlash} />
-            </span>
-          </div>
-
-          <button type="submit" className="submit-btn">
-            Create Account
-          </button>
-
-          <hr className="form-divider"/>
-
-          <p className="redirect-text">
-            Already have an account?
-            <Link to="/login"> Login</Link>
-            </p>
-        </form>
-      </div>
+        </div>
+      </form>
     </div>
   );
 }

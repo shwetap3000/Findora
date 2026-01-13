@@ -10,7 +10,7 @@ class UserModel(AbstractUser):
     REQUIRED_FIELDS = ['username']
 
     def __str__(self):
-        return self.username 
+        return self.email 
     
 
 # personal info
@@ -26,7 +26,7 @@ class Profile(models.Model):
     verified = models.BooleanField(default=False)
 
     def __str__(self):
-        return self.user.username
+        return self.user.email 
     
 
 # signal function

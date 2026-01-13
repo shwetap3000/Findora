@@ -11,6 +11,7 @@ from rest_framework.permissions import IsAuthenticated
 
 @api_view(['POST'])
 def RegisterView(request):
+    print(request.data)
     serializer = RegisterSerializer(data=request.data)
 
     if serializer.is_valid():
@@ -29,43 +30,19 @@ def RegisterView(request):
 
 @api_view(['POST'])
 def LoginView(request):
+    print(request.data)
+    serializer = LoginSerializer(data=request.data)
 
-    email = request.data.get('email')
-    password = request.data.get('password')
+    if serializer.is_valid():
+        user = serializer.validated_data['user']
+        refresh = RefreshToken.for_user(user)
 
-    if not email or not password:
-        return Response(
-            {'message': 'Email and password are required.'},
-            status=status.HTTP_400_BAD_REQUEST
-        )
-    
-    user = authenticate(
-        email = email,
-        password = password
-    )
-
-    if user is None:
-        return Response(
-            {'message': 'Invalid Credentials'},
-            status=status.HTTP_400_BAD_REQUEST
-        )
-    
-    refresh = RefreshToken.for_user(user)
-
-    return Response(
-        {
+        return Response({
             'refresh': str(refresh),
             'access': str(refresh.access_token),
-
-            # 'user': {
-            #     'id': user.id,
-            #     'email': user.email,
-            #     'username': user.username
-            # }
-
-        },
-        status=status.HTTP_200_OK
-    )
+        }, status=status.HTTP_200_OK)
+    
+    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
 @api_view(['GET'])
@@ -78,6 +55,57 @@ def ProfileView(request):
         "username": user.username,
         "email": user.email
     })
+
+
+
+# @api_view(['POST'])
+# def LoginView(request):
+
+#     # receving data in form of {'username': .. , 'password' : ..}
+#     print(request.data)
+#     print(request.data.get('email'))
+#     print(request.data.get('password'))
+
+#     # the email is getting stored in username variable (by default) hence we have used 'username' here and not 'email'
+#     email = request.data.get('email')
+#     password = request.data.get('password')
+
+#     if not email or not password:
+#         return Response(
+#             {'message': 'Email and password are required.'},
+#             status=status.HTTP_400_BAD_REQUEST 
+#         )
+    
+#     user = authenticate(
+#         email = email,
+#         # username = email,
+#         password = password
+#     )
+
+#     if user is None:
+#         return Response(
+#             {'message': 'Invalid Credentials'},
+#             status=status.HTTP_400_BAD_REQUEST
+#         )
+    
+#     refresh = RefreshToken.for_user(user)
+
+#     return Response(
+#         {
+#             'refresh': str(refresh),
+#             'access': str(refresh.access_token),
+
+#             # 'user': {
+#             #     'id': user.id,
+#             #     'email': user.email,
+#             #     'username': user.username 
+#             # }
+
+#         },
+#         status=status.HTTP_200_OK
+#     )
+
+
 
 
 

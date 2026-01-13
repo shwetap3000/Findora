@@ -217,3 +217,7 @@ JAZZMIN_SETTINGS = {
         "found.FoundItem": "fas fa-box",
     },
 }
+
+AUTHENTICATION_BACKENDS = [
+    'django.contrib.auth.backends.ModelBackend',
+]
