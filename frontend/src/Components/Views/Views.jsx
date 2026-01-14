@@ -7,7 +7,7 @@ import Report from "../Report/Report";
 import Profile from "../Profile/Profile";
 import Footer from "../Common/Footer";
 import PrivateRoute from "./PrivateRoute";
-// import Login from "../Auth/Login";
+import Login from "../Auth/Login";
 // import SignUp from "../Auth/SignUp";
 
 function Views() {
@@ -20,7 +20,7 @@ function Views() {
           {/* Public routes */}
           <Route path="/" element={<Heroic />} />
           <Route path="/dashboard" element={<Dashboard />} />
-          {/* <Route path="/login" element={<Login />} /> */}
+          <Route path="/login" element={<Login />} />
           {/* <Route path="/signup" element={<SignUp />} /> */}
 
           {/* <Route path="/report" element={<Report />} />

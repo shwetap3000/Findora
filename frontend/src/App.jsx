@@ -1,13 +1,13 @@
 import "./App.css";
 import Login from "./Components/Auth/Login";
-// import Views from "./Components/Views/Views";
+import Views from "./Components/Views/Views";
 import SignUp from "./Components/Auth/SignUp";
 
 function App() {
   return (
     <div>
-      {/* <Views /> */}
-      <Login />
+      <Views />
+      {/* <Login /> */}
       {/* <SignUp /> */}
     </div>
   )

@@ -55,6 +55,9 @@ function Navbar() {
               <Link to="/profile" className="link">
                 Profile
               </Link>
+              <Link to="/login" className="link">
+                Login
+              </Link>
             </div>
           </div>
         )}
