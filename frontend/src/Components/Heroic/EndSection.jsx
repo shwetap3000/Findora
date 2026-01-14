@@ -7,7 +7,7 @@ function EndSection() {
   const navigate = useNavigate();
 
   const handleStart = () => {
-    navigate("/report-item");
+    navigate("/report");
     // console.log("Clicked Get Started");
   };
 
