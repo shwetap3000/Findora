@@ -3,11 +3,13 @@ import "../../Styles/Login.css";
 import "../../Styles/Report.css";
 import axios from "axios";
 import { useState } from "react";
+import { Navigate, useNavigate } from "react-router-dom";
 
 function Login() {
   // usestate to store the login result
   const [success, setSuccess] = useState("");
   const [error, setError] = useState("");
+  const navigate = useNavigate();
 
   const {
     register,
@@ -38,6 +40,10 @@ function Login() {
       // store jwt refresh and access token
       localStorage.setItem("accessToken", response.data.access);
       localStorage.setItem("refreshToken", response.data.refresh);
+      alert("Logged-in successfully!");
+
+      // after login navigate to profile page
+      navigate("/profile");
 
       // set success message
       // console.log("Logged-in successfully", response.data);
