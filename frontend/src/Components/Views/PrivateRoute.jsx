@@ -2,7 +2,6 @@ import { Navigate } from 'react-router-dom'
 
 const PrivateRoute = ({ Page }) => {
     
-    // get the access token from the local storage to check if user is logged in or not
     const accessToken = localStorage.getItem('accessToken');
 
     if (!accessToken) {

@@ -1,7 +1,8 @@
 import { useForm } from "react-hook-form";
-import "../../Styles/Login.css";
+import "../../Styles/Report.css";
 
 function SignUp() {
+
   const {
     register,
     handleSubmit,
@@ -9,9 +10,16 @@ function SignUp() {
     formState: {errors},
   } = useForm();
 
-  const onSubmit = (data) => {
-    console.log(data);
-  };
+  // const onSubmit = (data) => {
+  //   console.log(data);
+  // };
+
+  const onSubmit = async (data) => {
+
+    
+
+
+  }
 
   return (
     <div className="form-wrapper">
