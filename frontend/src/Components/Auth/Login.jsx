@@ -3,7 +3,7 @@ import "../../Styles/Login.css";
 import "../../Styles/Report.css";
 import axios from "axios";
 import { useState } from "react";
-import { Navigate, useNavigate } from "react-router-dom";
+import { Navigate, useNavigate, Link } from "react-router-dom";
 
 function Login() {
   // usestate to store the login result
@@ -138,6 +138,8 @@ function Login() {
               })}
             />
 
+            <Link>Forgot Password ?</Link>
+
             {errors.password && (
               <p className="error-text">{errors.password.message}</p>
             )}
@@ -147,6 +149,11 @@ function Login() {
             <button type="submit" className="submit-btn">
               Submit
             </button>
+          </div>
+
+          <div>
+            <p>Don't have an account?</p>
+            <Link to='/signup'>Sign Up</Link>
           </div>
         </form>
       </div>

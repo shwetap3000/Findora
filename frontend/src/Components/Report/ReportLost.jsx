@@ -1,9 +1,9 @@
-import React, { useState } from "react";
 import "../../Styles/Report.css";
 import { useForm } from "react-hook-form";
 import axios from "axios";
 
 function ReportLost() {
+
   // to handle the form
   const {
     register,
@@ -32,8 +32,6 @@ function ReportLost() {
 
     // console.log(formData);
   };
-
-
 
   // // states to store form data to send to backend
   // // instead of using so many usestate we use one state object
@@ -72,6 +70,8 @@ function ReportLost() {
 
   return (
     <div className="form-wrapper">
+
+      {/* form to report lost item */}
       <form onSubmit={handleSubmit(onSubmit)}>
         {/* Title field */}
         <div className="form-fields">
@@ -234,7 +234,7 @@ function ReportLost() {
 
         <div>
           <button type="submit" className="submit-btn">
-            Submit
+            Report Lost
           </button>
         </div>
       </form>

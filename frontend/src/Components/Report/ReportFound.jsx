@@ -187,7 +187,7 @@ function ReportFound() {
 
         <div>
           <button type="submit" className="submit-btn">
-            Submit
+            Report Found
           </button>
         </div>
       </form>

@@ -1,13 +1,14 @@
 import { useForm } from "react-hook-form";
 import "../../Styles/Report.css";
+import { Link } from "react-router-dom";
+import axios from "axios";
 
 function SignUp() {
-
   const {
     register,
     handleSubmit,
     reset,
-    formState: {errors},
+    formState: { errors },
   } = useForm();
 
   // const onSubmit = (data) => {
@@ -15,11 +16,20 @@ function SignUp() {
   // };
 
   const onSubmit = async (data) => {
+    try {
+      const response = await axios.post("http://127.0.0.1:8000/accounts/register/", {
+        username: data.username,
+        email: data.email,
+        password: data.password,
+      });
 
-    
+      console.log(data);
+    } catch (error) {
+      console.log("Error: ", error);
+    }
 
-
-  }
+    reset();
+  };
 
   return (
     <div className="form-wrapper">
@@ -29,19 +39,25 @@ function SignUp() {
             Username : <sup className="imp-mark">*</sup>
           </label>
 
-          <input 
-          type="text" 
-          className="form-input"
-          {...register('username', {
-            required: 'Username is required.',
-            minLength: {value: 3, message: 'Username must be 3 characters long'},
-            maxLength: {value: 30, message: 'Username cannot excced 30 characters.'},
-          })}
+          <input
+            type="text"
+            className="form-input"
+            {...register("username", {
+              required: "Username is required.",
+              minLength: {
+                value: 3,
+                message: "Username must be 3 characters long",
+              },
+              maxLength: {
+                value: 30,
+                message: "Username cannot excced 30 characters.",
+              },
+            })}
           />
 
           {errors.username && (
-            <p className="error-text">{ errors.username.message }</p>
-          ) }
+            <p className="error-text">{errors.username.message}</p>
+          )}
         </div>
 
         <div className="form-fields">
@@ -49,18 +65,15 @@ function SignUp() {
             Email : <sup className="imp-mark">*</sup>
           </label>
 
-          <input 
-          type="email" 
-          className="form-input"
-          {...register('email', {
-            required: 'Email is required.',
-          })}
+          <input
+            type="email"
+            className="form-input"
+            {...register("email", {
+              required: "Email is required.",
+            })}
           />
 
-          {errors.email && (
-            <p className="error-text">{errors.email.message}</p>
-          )}
-
+          {errors.email && <p className="error-text">{errors.email.message}</p>}
         </div>
 
         <div className="form-fields">
@@ -68,15 +81,23 @@ function SignUp() {
             Password : <sup className="imp-mark">*</sup>
           </label>
 
-          <input 
-          type="password" 
-          className="form-input"
-          {...register('password', {
-            required: 'Password is required.',
-            minLength: {value: 3, message: 'Password must be 8 characters long'},
-            maxLength: {value: 30, message: 'Password cannot excced 30 characters.'},
-          })}
+          <input
+            type="password"
+            className="form-input"
+            {...register("password", {
+              required: "Password is required.",
+              minLength: {
+                value: 3,
+                message: "Password must be 8 characters long",
+              },
+              maxLength: {
+                value: 30,
+                message: "Password cannot excced 30 characters.",
+              },
+            })}
           />
+
+          <Link>Forgot Password ?</Link>
 
           {errors.password && (
             <p className="error-text">{errors.password.message}</p>
@@ -85,6 +106,11 @@ function SignUp() {
           <div>
             <button className="submit-btn">Submit</button>
           </div>
+        </div>
+
+        <div>
+          <p>Already have an account?</p>
+          <Link to="/login">Login</Link>
         </div>
       </form>
     </div>

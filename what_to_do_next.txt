@@ -1,0 +1,3 @@
+1. Popup message for report lost and report found 
+2. Popup message for successful login and logout
+3. Fully functional signup page
