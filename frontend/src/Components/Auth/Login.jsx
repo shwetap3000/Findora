@@ -94,10 +94,20 @@ function Login() {
   return (
     <div>
       <div className="form-wrapper">
-        {success && <p>{success}</p>}
-        {error && <p>{error}</p>}
+        {/* <div>
+          {success && <p>{success}</p>}
+          {error && <p>{error}</p>}
+        </div> */}
 
         <form onSubmit={handleSubmit(onSubmit)}>
+
+          <div className="login-welcome">
+             <p className="login-welcome-para">Nice to see you again</p>
+            <h2 className="login-welcome-header">Welcome Back !</h2>
+           
+          </div>
+          
+
           <div className="form-fields">
             <label className="form-label">
               Email <sup className="imp-mark">*</sup>
@@ -138,22 +148,24 @@ function Login() {
               })}
             />
 
-            <Link>Forgot Password ?</Link>
-
             {errors.password && (
               <p className="error-text">{errors.password.message}</p>
             )}
+
+            <Link to='/' className="forgot-link">Forgot Password?</Link>
           </div>
 
           <div>
             <button type="submit" className="submit-btn">
-              Submit
+              Login
             </button>
           </div>
 
           <div>
-            <p>Don't have an account?</p>
-            <Link to='/signup'>Sign Up</Link>
+            <p className="signup-ques">New to Findora? 
+              <span><Link to='/signup' className="signup-link">Create an account</Link></span>
+            </p>
+            
           </div>
         </form>
       </div>
