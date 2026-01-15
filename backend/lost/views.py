@@ -29,6 +29,14 @@ def addLostItemsView(request):
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
+@api_view(['GET'])
+def totalLostView(request):
+    lost_items_count = Lost.objects.count()
+
+    return Response({
+        'total_lost_items' : lost_items_count,
+    })
+
 
 # # post method to get data from frontend (not saving into database yet.. just printing data in the terminal)
 # @api_view(['POST'])

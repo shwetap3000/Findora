@@ -30,7 +30,13 @@ function ReportFound() {
     await axios.post("http://127.0.0.1:8000/found/add_found_items/", formData);
     reset();
 
-    console.log(formData);
+    // scroll to top on report submission
+    window.scroll({
+      top: 0,
+      behavior: "smooth",
+    });
+
+    // console.log(formData);
   };
 
   return (

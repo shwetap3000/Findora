@@ -58,7 +58,7 @@ function UserInfo() {
   // };
 
   const handleEdit = () => {
-    alert("Edited successfully!");
+    alert("This feature is coming soon!");
   };
 
   return (

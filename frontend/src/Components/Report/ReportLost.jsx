@@ -3,7 +3,6 @@ import { useForm } from "react-hook-form";
 import axios from "axios";
 
 function ReportLost() {
-
   // to handle the form
   const {
     register,
@@ -29,6 +28,12 @@ function ReportLost() {
 
     await axios.post("http://127.0.0.1:8000/lost/add_lost_items/", formData);
     reset();
+
+    // scroll to top on report submission
+    window.scroll({
+      top: 0,
+      behavior: "smooth",
+    });
 
     // console.log(formData);
   };
@@ -70,7 +75,6 @@ function ReportLost() {
 
   return (
     <div className="form-wrapper">
-
       {/* form to report lost item */}
       <form onSubmit={handleSubmit(onSubmit)}>
         {/* Title field */}

@@ -7,6 +7,7 @@ from rest_framework.decorators import api_view, permission_classes
 from rest_framework.authentication import authenticate
 from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework.permissions import IsAuthenticated
+from .models import UserModel
 
 
 @api_view(['POST'])
@@ -55,6 +56,19 @@ def ProfileView(request):
         "username": user.username,
         "email": user.email
     })
+
+
+# view to get the number of active users
+@api_view(['GET'])
+# @permission_classes([IsAuthenticated])  --> we use this when we have to keep the data private to the logged-in users only but in our case we will keep it public so that everyone can see it
+def TotalUsersView(request):
+    users_count = UserModel.objects.count()
+
+    return Response({
+        # this name should exactly written when fetching the data
+        'total_users': users_count
+    })
+
 
 
 

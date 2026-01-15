@@ -26,3 +26,12 @@ def addFoundItemsView(request):
     
     print(serializer.errors)
     return Response(serializer.errors, status=status.HTTP_308_PERMANENT_REDIRECT)
+
+
+@api_view(['GET'])
+def totalFoundView(request):
+    found_items_count = Found.objects.count()
+
+    return Response({
+        'total_found_items': found_items_count
+    })
