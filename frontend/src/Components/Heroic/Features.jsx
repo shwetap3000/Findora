@@ -61,21 +61,23 @@ function Features() {
     <div>
       
       <div className="feature-wrapper">
-        <h3 className="feature-heading">PLATFORM HIGHLIGHTS</h3>
+        {/* <h3 className="feature-heading">PLATFORM HIGHLIGHTS</h3> */}
+        <span className="feature-span">WHY FINDORA?</span>
         <h4 className="feature-subHeading">Built to Make Recovery Easy</h4>
-        <p className="feature-para">Simple, secure, and reliable features that help you find what matters.</p>
+        <p className="feature-para">Simple, secure, and reliable features that help your campus recover lost items.</p>
       </div>
-      <button className="left-btn" onClick={handleBackwardclick}>
+      
+      {/* <button className="left-btn" onClick={handleBackwardclick}>
         <FontAwesomeIcon icon={faArrowLeft} />
       </button>
       <button className="right-btn" onClick={handleForwardClick}>
         <FontAwesomeIcon icon={faArrowRight} />
       </button>
 
-      <div className="feature-cards">
-        {/* passing data to Cards component */}
+      <div className="feature-cards"> */}
+        {/* passing data to Cards component
         <Cards data={features[currIndex]} />
-      </div>
+      </div> */}
 
       {/* <div className="feature-cards" >
 

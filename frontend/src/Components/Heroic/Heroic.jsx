@@ -3,6 +3,7 @@ import WelcomeCard from './WelcomeCard'
 import Info from './Info'
 import Features from './Features'
 import EndSection from './EndSection'
+import BrowseItems from './BrowseItems'
 
 function Heroic() {
   return (
@@ -10,7 +11,9 @@ function Heroic() {
         <WelcomeCard />
         <Info />
         <Features />
-        <EndSection />
+        <BrowseItems />
+        
+        {/* <EndSection /> */}
     </div>
   )
 }

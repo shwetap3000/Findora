@@ -38,10 +38,19 @@ function TotalItems() {
   const totalItems = totalLost + totalFound;
 
   return (
-    <div className="info-card item-card">
-      <FontAwesomeIcon icon={faBell} className="faBell" />
-      <p>Total Items: {totalItems}</p>
+    <div className="info-card-wrapper">
+  <div className="info-card totalItems-card">
+    <div className="info-card-header">
+      <FontAwesomeIcon icon={faBell} className="info-icon bell-icon" />
     </div>
+
+    <div className="info-card-body">
+      <p className="info-title">Active Users</p>
+      <p className="info-value">{totalItems}</p>
+    </div>
+  </div>
+</div>
+
   );
 }
 

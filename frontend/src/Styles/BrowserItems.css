@@ -1,0 +1,48 @@
+.browser-items-wrapper {
+    width: 90%;
+    padding: 2rem 1rem;
+    padding-top: 0;
+    display: flex;
+    justify-content: center;
+    
+}
+
+.browser-items-btn {
+    width: 90%;
+    max-width: 380px; 
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem 1.4rem; 
+    font-size: 1rem;
+    font-weight: 600;
+    color: #ffffff;
+    background:  #1454dd;
+    border: 1px solid #e5e7eb;
+    border-radius: 1rem;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    transition: 
+        transform 0.2s ease,
+        box-shadow 0.2s ease,
+        background-color 0.2s ease;
+}
+
+/* Hover / Tap */
+.browser-items-btn:hover {
+    background-color: #1242a2;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
+}
+
+/* Icon */
+.browser-items-btn svg {
+    font-size: 1rem;
+    color: #374151;
+}
+
+.browser-link {
+    color: white;
+    text-decoration: none;
+    margin-left: 0.5rem;
+}
