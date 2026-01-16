@@ -1,47 +1,55 @@
 .wrapper {
     width: 80%;
     max-width: 28rem;
-    min-height: 15rem;
+    min-height: 10rem;
     margin: 2rem auto;
-    padding: 1.8rem;
-    background: linear-gradient(135deg, rgb(3, 20, 78), rgb(63, 95, 192));
+    padding: 1rem;
+    background: linear-gradient(135deg, rgb(16, 46, 144), rgb(72, 107, 213));
     color: white;
     border-radius: 1.2rem;
-    box-shadow: 0 16px 16px rgba(0,0,0,0.15);
+    box-shadow: 5px 15px 15px rgba(0,0,0,0.4);
     display: flex;
     flex-direction: column;
     justify-content: space-between;
 }
 
 .card-heading {
-    font-size: 1.5rem;
+    font-size: 1.7rem;
     font-weight: 600;
     margin: 0 0 .4rem 0;
+    margin-bottom: 1rem;
+    font-family: cursive;
 }
 
 .card-para {
-    font-size: 1rem;
+    font-size: 1.1rem;
     line-height: 1.4;
     margin: 0;
     opacity: 0.9;
 }
 
-.card-btn {
-    background-color: #fff;
-    color: rgb(17, 44, 143);
+.card-link {
+    text-decoration: none;
+}
 
+.card-btn {
+    background-color: rgba(10, 184, 10, 0.801);
+    color: white;
     border: none;
     height: 2.6rem;
-    width: 9.5rem;
-    border-radius: .6rem;
-    font-weight: 600;
+    width: 12.5rem;
+    border-radius: 0.7rem;
+    font-weight: 550;
+    font-size: medium;
+    font-family: "bubbler-one", sans-serif;
     cursor: pointer;
     align-self: flex-start;
-    margin-top: 1.2rem;
+    margin-top: 0.2rem;
     display: flex;
     justify-content: center;
     align-items: center;
-    transition: background .2s ease, transform .2s ease;
+    box-shadow: 5px 5px 5px rgba(0,0,0,0.4);
+    /* transition: background .2s ease, transform .2s ease; */
 }
 
 .card-btn:hover {
@@ -49,45 +57,17 @@
     transform: translateY(-2px);
 }
 
-
-
-
-
-
-
-
-
-
-/* .wrapper {
-    width: 90%;
-    height: 15rem;
-    background-color: rgb(17, 44, 143);
-    color: white;
-    border-radius: 1rem;
-    margin: auto;
+.welcome-card-image {
+    width: 7.5rem;
+    height: 6rem;
+    float: right;
+    margin-top: 2rem;
 }
 
-.card-heading {
-    margin-left: 1.5rem;
-    margin-top: 1rem;
-    margin-bottom: 0;
-    padding-bottom: 0;
-    padding-top: 2rem;
-    font-size: 1.5rem;
+.sub-wrapper {
+    display: flex;
 }
 
-.card-para {
-    padding: 1.5rem;
-    padding-top: 0;
-    margin-top: 0;
+.maginifying-glass {
+    margin-right: 0.5rem;
 }
-
-.card-btn {
-    background-color: white;
-    height: 2.5rem;
-    width: 9rem;
-    border-radius: 0.5rem;
-    margin: 0 auto;
-    margin-left: 30%;
-
-} */
