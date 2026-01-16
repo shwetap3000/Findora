@@ -1,7 +1,7 @@
 import React from 'react';
 import '../../Styles/Dashboard.css';
 
-// items and displayItems are being passed as props from Dashboard.jsx
+// items and displayItems are being passed as props from CategoryBtns.jsx
 function ItemCard({items, displayItems}) {
   return (
     <div className="items-wrapper">

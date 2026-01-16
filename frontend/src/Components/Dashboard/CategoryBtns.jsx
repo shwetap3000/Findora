@@ -1,6 +1,7 @@
 import { useState } from "react";
 import ItemCard from "./ItemCard";
 import sortedItems from "./Items";
+// import maginifyingGlass from "../../assets/maginifyingGlass.svg";
 
 function CategoryBtns() {
   // This should be inside the function component
@@ -8,59 +9,62 @@ function CategoryBtns() {
 
   // state variable to store the current value to be display
   const [clicked, setClicked] = useState("all");
-  let displayItems;
+  // state varibale to store the search box's value
+  const [search, setSearch] = useState("");
 
-  const handleLostBtnClick = () => {
-    setClicked("lost");
-  };
-
-  const handleFoundBtnClick = () => {
-    setClicked("found");
-  };
-
-  const handleAllBtnClick = () => {
-    setClicked("all");
-  };
-
-  // condition to check if all items have to be displayed or not
-  if (clicked === "all") {
-    displayItems = items;
-  } else {
-    // filtering out the lost or found items according to the  button clicked
-    displayItems = items.filter((item) => item.status === clicked);
-  }
-
-  // console.log(displayItems);
+  const displayItems = items
+    .filter((item) => clicked === "all" || item.status === clicked)
+    .filter(
+      (item) =>
+        item.title.toLowerCase().includes(search.toLowerCase()) ||
+        item.location.toLowerCase().includes(search.toLowerCase())
+    );
 
   return (
-    <div>
+    <div className="dashboard-wrapper">
+      {/* Search Box */}
+
+      {/* <img src={maginifyingGlass} alt="magnifyingGlass" /> */}
+
+      <input
+        type="text"
+        placeholder="Search lost & found items...."
+        className="search-input"
+        value={search}
+        onChange={(e) => setSearch(e.target.value)}
+      />
+
       {/* buttons to filter items */}
 
       <div className="filter-bar">
         <button
           className={`filter-btn ${clicked === "all" ? "active" : ""}`}
-          onClick={handleAllBtnClick}
+          onClick={() => setClicked("all")}
         >
           All
         </button>
 
         <button
           className={`filter-btn lost ${clicked === "lost" ? "active" : ""}`}
-          onClick={handleLostBtnClick}
+          onClick={() => setClicked("lost")}
         >
           Lost
         </button>
 
         <button
           className={`filter-btn found ${clicked === "found" ? "active" : ""}`}
-          onClick={handleFoundBtnClick}
+          onClick={() => setClicked("found")}
         >
           Found
         </button>
       </div>
 
-      {/* passed items and displayItems as props */}
-      <ItemCard items={items} displayItems={displayItems} />
+      {displayItems.length === 0 ? (
+        <p className="no-items">No items found.</p>
+      ) : (
+        //  passed items and displayItems as props
+        <ItemCard displayItems={displayItems} />
+      )}
     </div>
   );
 }
