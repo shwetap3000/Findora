@@ -102,8 +102,8 @@ function Login() {
         <form onSubmit={handleSubmit(onSubmit)}>
 
           <div className="login-welcome">
-             <p className="login-welcome-para">Nice to see you again</p>
             <h2 className="login-welcome-header">Welcome Back !</h2>
+             <p className="login-welcome-para">Nice to see you again</p>
            
           </div>
           

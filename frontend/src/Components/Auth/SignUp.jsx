@@ -1,5 +1,6 @@
 import { useForm } from "react-hook-form";
 import "../../Styles/Report.css";
+import "../../Styles/SignUp.css"
 import { Link } from "react-router-dom";
 import axios from "axios";
 
@@ -34,6 +35,16 @@ function SignUp() {
   return (
     <div className="form-wrapper">
       <form onSubmit={handleSubmit(onSubmit)}>
+
+        <div className="singup-welcome">
+          <h2 className="singup-welcome-header">
+            Create your account
+          </h2>
+          <p className="singup-welcome-para">
+            Join your campus lost & found network
+          </p>
+        </div>
+
         <div className="form-fields">
           <label className="form-label">
             Username : <sup className="imp-mark">*</sup>
@@ -97,21 +108,24 @@ function SignUp() {
             })}
           />
 
-          <Link>Forgot Password ?</Link>
-
           {errors.password && (
             <p className="error-text">{errors.password.message}</p>
           )}
 
+          <Link to='/' className="forgot-link">Forgot Password?</Link>
+
+          
+
           <div>
-            <button className="submit-btn">Submit</button>
+            <button className="submit-btn">Create account</button>
           </div>
         </div>
 
         <div>
-          <p>Already have an account?</p>
-          <Link to="/login">Login</Link>
+          <p className="signup-ques">Already have an account? <span><Link to="/login" className="signup-link">Login</Link></span></p>
         </div>
+
+        <p className="signup-end-para">We respect your privacy. Your details are only used to help return lost items.</p>
       </form>
     </div>
   );

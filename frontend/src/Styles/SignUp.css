@@ -1,0 +1,32 @@
+.singup-welcome {
+    text-align: center;
+}
+
+.singup-welcome-header {
+    margin-bottom: 0;
+    color: rgb(17, 44, 143);
+    font-family: cursive;
+    font-size: 1.6rem;
+}
+
+.singup-welcome-para {
+    margin-top: 0;
+    font-size: small;
+    margin-bottom: 2rem;
+    color: grey;
+}
+
+.signup-end-para {
+    color: grey;
+    font-size: small;
+    text-align: center;
+    margin-top: 3.5rem;
+}
+
+.submit-btn {
+    margin-top: 2rem;
+}
+
+.form-wrapper {
+    margin-top: 0rem;
+}

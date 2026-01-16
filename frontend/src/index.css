@@ -9,4 +9,9 @@
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
+
+  /* always in mobile view (for all screen size) */
+  max-width: 500px;
+  margin: 0 auto;
 }

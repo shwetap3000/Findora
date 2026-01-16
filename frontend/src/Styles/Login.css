@@ -5,33 +5,25 @@
 
 .login-welcome-para {
     color: #555;
-    font-size: large;
-    margin-bottom: 0rem;
+    font-size: small;
+    margin-top: 0rem;
 }
 
 .login-welcome-header {
-    font-size: 1.8rem;
-    margin-top: 0rem;
+    font-size: 2rem;
+    margin-bottom: 0rem;
     color: rgb(17, 44, 143);
     font-family: cursive;
 }
 
-.form-wrapper {
-    margin-top: 2rem;
-    margin-bottom: 0rem;
-}
-
 .forgot-link {
-    margin-left: 8.5rem;
+    margin-left: 7rem;
     margin-top: 0.5rem;
     text-decoration: none;
+    align-self: flex-end;
 }
 
 .signup-link {
     margin-left: 0.5rem;
     text-decoration: none;
-}
-
-.signup-ques {
-    margin-left: 0.5rem;
 }
