@@ -3,13 +3,22 @@ import "../../Styles/Login.css";
 import "../../Styles/Report.css";
 import axios from "axios";
 import { useState } from "react";
+import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Navigate, useNavigate, Link } from "react-router-dom";
+
 
 function Login() {
   // usestate to store the login result
   const [success, setSuccess] = useState("");
   const [error, setError] = useState("");
   const navigate = useNavigate();
+  
+  const [isVisible, setIsVisible] = useState(false)
+
+  const handleVisibility = () => {
+    setIsVisible(!isVisible);
+  }
 
   const {
     register,
@@ -132,9 +141,10 @@ function Login() {
               Password <sup className="imp-mark">*</sup>
             </label>
 
-            <input
+            <div className="password-wrapper">
+              <input
               className="form-input"
-              type="password"
+              type={isVisible === true ? "text" : "password"}
               {...register("password", {
                 required: "Password is required.",
                 minLength: {
@@ -147,6 +157,21 @@ function Login() {
                 },
               })}
             />
+
+            {isVisible === true ? (
+              <FontAwesomeIcon
+                icon={faEye}
+                className="password-eye"
+                onClick={handleVisibility}
+              />
+            ) : (
+              <FontAwesomeIcon
+                icon={faEyeSlash}
+                className="password-eye"
+                onClick={handleVisibility}
+              />
+            )}
+            </div>
 
             {errors.password && (
               <p className="error-text">{errors.password.message}</p>

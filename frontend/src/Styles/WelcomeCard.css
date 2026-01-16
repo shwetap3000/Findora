@@ -52,11 +52,6 @@
     /* transition: background .2s ease, transform .2s ease; */
 }
 
-.card-btn:hover {
-    background-color: white;
-    transform: translateY(-2px);
-}
-
 .welcome-card-image {
     width: 7.5rem;
     height: 6rem;

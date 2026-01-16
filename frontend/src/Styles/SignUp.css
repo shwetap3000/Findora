@@ -35,3 +35,45 @@
     margin: 1.5rem;
     margin-bottom: 0;
 }
+
+.password-wrapper {
+  position: relative;
+  display: block;
+  width: 100%;
+}
+
+.password-wrapper input {
+    width: 90%;
+}
+
+.password-eye {
+  position: absolute;
+  top: 50%;
+  right: 25px;
+  transform: translateY(-50%);
+  cursor: pointer;
+  color: grey;
+}
+
+
+
+/* 
+.password-wrapper {
+  position: relative;
+  display: inline-block;
+  width: 100%;
+}
+
+.password-eye {
+  position: absolute;
+  top: 50%;
+  right: 12px;        
+  transform: translateY(-50%);
+  cursor: pointer;
+  color: #6b7280;
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: auto;
+} */
