@@ -5,7 +5,7 @@
 
 .login-welcome-para {
     color: #555;
-    font-size: small;
+    font-size: medium;
     margin-top: 0rem;
 }
 
@@ -26,4 +26,9 @@
 .signup-link {
     margin-left: 0.5rem;
     text-decoration: none;
+}
+
+.login-sub-wrapper {
+    margin: 1.5rem;
+    margin-bottom: 0;
 }

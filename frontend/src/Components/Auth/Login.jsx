@@ -99,7 +99,7 @@ function Login() {
           {error && <p>{error}</p>}
         </div> */}
 
-        <form onSubmit={handleSubmit(onSubmit)}>
+        <form onSubmit={handleSubmit(onSubmit)} className="login-sub-wrapper">
 
           <div className="login-welcome">
             <h2 className="login-welcome-header">Welcome Back !</h2>

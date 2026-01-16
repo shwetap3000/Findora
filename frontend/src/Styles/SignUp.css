@@ -6,12 +6,12 @@
     margin-bottom: 0;
     color: rgb(17, 44, 143);
     font-family: cursive;
-    font-size: 1.6rem;
+    font-size: 1.9rem;
 }
 
 .singup-welcome-para {
     margin-top: 0;
-    font-size: small;
+    font-size: 0.9rem;
     margin-bottom: 2rem;
     color: grey;
 }
@@ -20,7 +20,7 @@
     color: grey;
     font-size: small;
     text-align: center;
-    margin-top: 3.5rem;
+    margin-top: 2rem;
 }
 
 .submit-btn {
@@ -29,4 +29,9 @@
 
 .form-wrapper {
     margin-top: 0rem;
+}
+
+.signup-sub-wrapper {
+    margin: 1.5rem;
+    margin-bottom: 0;
 }

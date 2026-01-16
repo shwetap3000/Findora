@@ -34,7 +34,7 @@ function SignUp() {
 
   return (
     <div className="form-wrapper">
-      <form onSubmit={handleSubmit(onSubmit)}>
+      <form onSubmit={handleSubmit(onSubmit)} className="signup-sub-wrapper">
 
         <div className="singup-welcome">
           <h2 className="singup-welcome-header">
@@ -111,15 +111,29 @@ function SignUp() {
           {errors.password && (
             <p className="error-text">{errors.password.message}</p>
           )}
+        </div>
 
-          <Link to='/' className="forgot-link">Forgot Password?</Link>
+        <div className="form-fields">
+          <label className="form-label">
+            Confirm Password : <sup className="imp-mark">*</sup>
+          </label>
 
-          
+          <input
+            type="password"
+            className="form-input"
+            {...register("confirmPassword", {
+              required: "Confirm Password is required.",
+            })}
+          />
 
-          <div>
+          {errors.password && (
+            <p className="error-text">{errors.password.message}</p>
+          )}
+        </div>
+
+        <div>
             <button className="submit-btn">Create account</button>
           </div>
-        </div>
 
         <div>
           <p className="signup-ques">Already have an account? <span><Link to="/login" className="signup-link">Login</Link></span></p>
