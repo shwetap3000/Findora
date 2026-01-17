@@ -17,8 +17,8 @@ function Footer() {
       </div>
 
       <div className="contact-links">
-        <p>Contact:</p>
-        abc@gmail.com
+        <p className="contact-para">Contact:</p>
+        <a href="mailto:findora.campus@gmail.com" className="official-mail">findora.campus@gmail.com</a>
       </div>
 
       <div className="footer-bottom">

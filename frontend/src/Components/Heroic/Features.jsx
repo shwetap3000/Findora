@@ -1,8 +1,6 @@
 import React, { useState } from "react";
 import "../../Styles/Features.css";
-import Cards from "./Cards";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faArrowRight, faArrowLeft } from "@fortawesome/free-solid-svg-icons";
+import {Link} from 'react-router-dom';
 
 // data for features cards 
 const features = [
@@ -62,7 +60,7 @@ function Features() {
       
       <div className="feature-wrapper">
         {/* <h3 className="feature-heading">PLATFORM HIGHLIGHTS</h3> */}
-        <span className="feature-span">WHY FINDORA?</span>
+        <Link to="/about" style={{textDecoration: "none"}}><span className="feature-span">WHY FINDORA?</span></Link>
         <h4 className="feature-subHeading">Built to Make Recovery Easy</h4>
         <p className="feature-para">Simple, secure, and reliable features that help your campus recover lost items.</p>
       </div>

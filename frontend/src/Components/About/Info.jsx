@@ -58,7 +58,7 @@ function Info() {
         </div>
 
         <p className="mission-para">
-            Have questions or need assistance? Feel free to reach out to us at: <span className='email'>suport@findora.in</span>
+            Have questions or need assistance? Feel free to reach out to us at: <a href="mailto:findora.campus@gmail.com" className="official-mail">findora.campus@gmail.com</a>
         </p>
       </div>
     </div>
