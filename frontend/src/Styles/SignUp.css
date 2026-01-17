@@ -1,4 +1,146 @@
-.singup-welcome {
+.singup-form-wrapper {
+    /* min-height: 100vh; */
+    display: flex;
+    justify-content: center;
+    padding: 80px 24px 40px;
+    margin-top: -50px;
+}
+
+.signup-sub-wrapper {
+    width: 100%;
+    max-width: 440px;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+.signup-welcome {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 6px;
+}
+
+.signup-welcome-header {
+    font-size: 24.5px;
+    font-weight: 600;
+    color: #0e3694;
+    font-family: cursive;
+    margin: 0;
+}
+
+.signup-welcome img {
+    width: 15rem;
+    height: auto;
+}
+
+.signup-form-fields {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.signup-form-label {
+    font-size: 13px;
+    color: #555;
+}
+
+.imp-mark {
+    color: #e53935;
+}
+
+.signup-form-input {
+    width: 90%;
+    padding: 12px 14px;
+    font-size: 14.5px;
+
+    border-radius: 8px;
+    border: 1px solid #ddd;
+    outline: none;
+
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.signup-form-input:focus {
+    border-color: #0e3694;
+    box-shadow: 0 0 0 3px rgba(87, 76, 175, 0.15);
+}
+
+.signup-password-wrapper {
+    position: relative;
+}
+
+.signup-password-eye {
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 16px;
+    color: #777;
+    cursor: pointer;
+}
+
+.error-text {
+    font-size: 12px;
+    color: #e53935;
+}
+
+.signup-submit-btn {
+    width: 100%;
+    padding: 12px;
+    background: #0c0fa4;
+    color: #fff;
+    font-size: 15px;
+    font-weight: 600;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.2s ease, transform 0.1s ease;
+}
+
+.signup-submit-btn:hover {
+    background: #02035c;
+}
+
+.signup-submit-btn:active {
+    transform: scale(0.98);
+}
+
+.signup-ques {
+    font-size: 14px;
+    color: #555;
+    text-align: center;
+    margin: 0;
+}
+
+.login-link {
+    color: #0c0fa4;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.login-link:hover {
+    text-decoration: underline;
+}
+
+.signup-end-para {
+    font-size: 12.5px;
+    color: #777;
+    text-align: center;
+    line-height: 1.5;
+}
+
+
+
+
+
+
+
+
+
+
+/* .singup-welcome {
     text-align: center;
 }
 
@@ -76,4 +218,4 @@
   align-items: center;
   justify-content: center;
   pointer-events: auto;
-} */
+} */ 

@@ -1,12 +1,13 @@
 import { useForm } from "react-hook-form";
 import "../../Styles/Report.css";
 import "../../Styles/SignUp.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import axios from "axios";
 import { useState } from "react";
 import Footer from "../Common/Footer";
+import signupImg from "../../assets/signupPage.png";
 
 function SignUp() {
   // state varaible for handling hide and show password feature
@@ -22,6 +23,8 @@ function SignUp() {
   const handleConfirmPassVisibility = () => {
     setIsConfirmPasswordVisible(!isConfirmPasswordVisible);
   };
+
+  const navigate = useNavigate();
 
   const {
     register,
@@ -45,7 +48,9 @@ function SignUp() {
         },
       );
 
-      console.log(data);
+      navigate('/login');
+
+      // console.log(data);
     } catch (error) {
       console.log("Error: ", error);
     }
@@ -55,23 +60,22 @@ function SignUp() {
 
   return (
     <div>
-      <div className="form-wrapper">
+      <div className="singup-form-wrapper">
         <form onSubmit={handleSubmit(onSubmit)} className="signup-sub-wrapper">
-          <div className="singup-welcome">
-            <h2 className="singup-welcome-header">Create your account</h2>
-            <p className="singup-welcome-para">
-              Join your campus lost & found network
-            </p>
+          <div className="signup-welcome">
+            <h2 className="signup-welcome-header">Create your account</h2>
+            <img src={signupImg} alt="signUp-img" />
           </div>
 
-          <div className="form-fields">
-            <label className="form-label">
+          <div className="signup-form-fields">
+            <label className="signup-form-label">
               Username : <sup className="imp-mark">*</sup>
             </label>
 
             <input
               type="text"
-              className="form-input"
+              placeholder="Enter your username"
+              className="signup-form-input"
               {...register("username", {
                 required: "Username is required.",
                 minLength: {
@@ -90,14 +94,15 @@ function SignUp() {
             )}
           </div>
 
-          <div className="form-fields">
-            <label className="form-label">
+          <div className="signup-form-fields">
+            <label className="signup-form-label">
               Email : <sup className="imp-mark">*</sup>
             </label>
 
             <input
               type="email"
-              className="form-input"
+              placeholder="Enter your email"
+              className="signup-form-input"
               {...register("email", {
                 required: "Email is required.",
               })}
@@ -108,15 +113,16 @@ function SignUp() {
             )}
           </div>
 
-          <div className="form-fields">
-            <label className="form-label">
+          <div className="signup-form-fields">
+            <label className="signup-form-label">
               Password : <sup className="imp-mark">*</sup>
             </label>
 
-            <div className="password-wrapper">
+            <div className="signup-password-wrapper">
               <input
                 type={isPasswordVisible === true ? "text" : "password"}
-                className="form-input"
+                placeholder="Create a password"
+                className="signup-form-input"
                 {...register("password", {
                   required: "Password is required.",
                   minLength: {
@@ -133,13 +139,13 @@ function SignUp() {
               {isPasswordVisible === true ? (
                 <FontAwesomeIcon
                   icon={faEye}
-                  className="password-eye"
+                  className="signup-password-eye"
                   onClick={handlePasswordVisibility}
                 />
               ) : (
                 <FontAwesomeIcon
                   icon={faEyeSlash}
-                  className="password-eye"
+                  className="signup-password-eye"
                   onClick={handlePasswordVisibility}
                 />
               )}
@@ -150,15 +156,16 @@ function SignUp() {
             )}
           </div>
 
-          <div className="form-fields">
-            <label className="form-label">
+          <div className="signup-form-fields">
+            <label className="signup-form-label">
               Confirm Password : <sup className="imp-mark">*</sup>
             </label>
 
-            <div className="password-wrapper">
+            <div className="signup-password-wrapper">
               <input
                 type={isConfirmPasswordVisible === true ? "text" : "password"}
-                className="form-input"
+                placeholder="Enter your confirm password"
+                className="signup-form-input"
                 {...register("confirmPassword", {
                   required: "Confirm Password is required.",
                 })}
@@ -167,13 +174,13 @@ function SignUp() {
               {isConfirmPasswordVisible === true ? (
                 <FontAwesomeIcon
                   icon={faEye}
-                  className="password-eye"
+                  className="signup-password-eye"
                   onClick={handleConfirmPassVisibility}
                 />
               ) : (
                 <FontAwesomeIcon
                   icon={faEyeSlash}
-                  className="password-eye"
+                  className="signup-password-eye"
                   onClick={handleConfirmPassVisibility}
                 />
               )}
@@ -185,14 +192,14 @@ function SignUp() {
           </div>
 
           <div>
-            <button className="submit-btn">Create account</button>
+            <button className="signup-submit-btn">Create account</button>
           </div>
 
           <div>
             <p className="signup-ques">
               Already have an account?{" "}
               <span>
-                <Link to="/login" className="signup-link">
+                <Link to="/login" className="login-link">
                   Login
                 </Link>
               </span>
