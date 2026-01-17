@@ -11,9 +11,9 @@ function Footer() {
       <div className="quick-links">
         <p>Quick Links:</p>
         <Link to="/">Home |</Link>
-        <Link to="/dashboard"> Dashboard |</Link>
-        <Link to="/report"> Report Item |</Link>
-        <Link to="/profile"> Profile</Link>
+        <Link to="/dashboard">Dashboard |</Link>
+        <Link to="/about">About</Link>
+        
       </div>
 
       <div className="contact-links">

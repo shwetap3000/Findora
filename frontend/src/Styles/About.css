@@ -1,0 +1,85 @@
+.about-card-heading {
+    font-family: cursive;
+    font-size: 2rem;
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+.about-img {
+    display: flex;
+    justify-content: flex-end;
+    
+}
+
+.about-card-img {
+    width: 13rem;
+    height: 7rem;
+    
+}
+
+.about-sub-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    margin-top: 0;
+    padding-top: 0;
+}
+
+.missoin-wrapper {
+    max-width: 720px;
+    margin: 35px 18px;
+    padding: 0 12px;
+}
+
+.sub-mission-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 10px;
+}
+
+.misison-icon {
+    font-size: 20px;
+    
+}
+
+.bulleye {
+    color: #c20303;
+}
+
+.clipboard {
+    color: rgb(3, 56, 170);
+}
+
+.envelope {
+    color: rgb(0, 108, 15);
+    margin-top: 3px;
+
+}
+
+.star {
+    color: rgb(237, 186, 0);
+}
+
+.mission-heading {
+    font-size: 22px;
+    font-weight: 600;
+    color: #222;
+    margin: 0;
+}
+
+.mission-para {
+    font-size: 15.5px;
+    line-height: 1.7;
+    color: #444444;
+    margin: 0;
+}
+
+.mission-span {
+    color: rgb(3, 56, 170);
+    font-weight: 500;
+}
+
+.email {
+    color: blue;
+}

@@ -1,14 +1,13 @@
-import React from "react";
 import { Route, Routes } from "react-router-dom";
 import Navbar from "../Common/Navbar";
 import Heroic from "../Heroic/Heroic";
 import Dashboard from "../Dashboard/Dashboard";
 import Report from "../Report/Report";
 import Profile from "../Profile/Profile";
-import Footer from "../Common/Footer";
 import PrivateRoute from "./PrivateRoute";
 import Login from "../Auth/Login";
 import SignUp from "../Auth/SignUp";
+import About from "../About/About";
 
 function Views() {
   return (
@@ -19,6 +18,7 @@ function Views() {
         <Routes>
           {/* Public routes */}
           <Route path="/" element={<Heroic />} />
+          <Route path="/about" element={<About />} />
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<SignUp />} />
