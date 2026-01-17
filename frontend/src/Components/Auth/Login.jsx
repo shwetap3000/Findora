@@ -7,19 +7,19 @@ import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Navigate, useNavigate, Link } from "react-router-dom";
 import Footer from "../Common/Footer";
-
+import loginImg from "../../assets/loginPage.png";
 
 function Login() {
   // usestate to store the login result
   const [success, setSuccess] = useState("");
   const [error, setError] = useState("");
   const navigate = useNavigate();
-  
-  const [isVisible, setIsVisible] = useState(false)
+
+  const [isVisible, setIsVisible] = useState(false);
 
   const handleVisibility = () => {
     setIsVisible(!isVisible);
-  }
+  };
 
   const {
     register,
@@ -36,6 +36,7 @@ function Login() {
 
       const response = await axios.post(
         "http://127.0.0.1:8000/accounts/login/",
+        // "http://192.168.1.4:8000/accounts/login/",
         {
           email: data.email,
           password: data.password,
@@ -44,7 +45,7 @@ function Login() {
           headers: {
             "Content-Type": "application/json",
           },
-        }
+        },
       );
 
       // store jwt refresh and access token
@@ -103,29 +104,27 @@ function Login() {
 
   return (
     <div>
-      <div className="form-wrapper">
+      <div className="login-form-wrapper">
         {/* <div>
           {success && <p>{success}</p>}
           {error && <p>{error}</p>}
         </div> */}
 
         <form onSubmit={handleSubmit(onSubmit)} className="login-sub-wrapper">
-
           <div className="login-welcome">
-            <h2 className="login-welcome-header">Welcome Back !</h2>
-             <p className="login-welcome-para">Nice to see you again</p>
-           
+            <h2 className="login-welcome-header">Welcome Back!</h2>
+            <img src={loginImg} alt="login-img" className="login-img" />
           </div>
-          
 
-          <div className="form-fields">
-            <label className="form-label">
+          <div className="login-form-fields">
+            <label className="login-form-label">
               Email <sup className="imp-mark">*</sup>
             </label>
 
             {/* registered name must be same as the field name in backend view */}
             <input
-              className="form-input"
+              className="login-form-input"
+              placeholder="Enter your email"
               type="text"
               {...register("email", {
                 required: "Email is required.",
@@ -137,61 +136,65 @@ function Login() {
             )}
           </div>
 
-          <div className="form-fields">
-            <label className="form-label">
+          <div className="login-form-fields">
+            <label className="login-form-label">
               Password <sup className="imp-mark">*</sup>
             </label>
 
-            <div className="password-wrapper">
+            <div className="login-password-wrapper">
               <input
-              className="form-input"
-              type={isVisible === true ? "text" : "password"}
-              {...register("password", {
-                required: "Password is required.",
-                minLength: {
-                  value: 5,
-                  message: "Password must be 8 characters long",
-                },
-                maxLength: {
-                  value: 20,
-                  message: "Password cannot exceed 30 characters",
-                },
-              })}
-            />
+                className="login-form-input"
+                placeholder="Enter your password"
+                type={isVisible === true ? "text" : "password"}
+                {...register("password", {
+                  required: "Password is required.",
+                  minLength: {
+                    value: 5,
+                    message: "Password must be 8 characters long",
+                  },
+                  maxLength: {
+                    value: 20,
+                    message: "Password cannot exceed 30 characters",
+                  },
+                })}
+              />
 
-            {isVisible === true ? (
-              <FontAwesomeIcon
-                icon={faEye}
-                className="password-eye"
-                onClick={handleVisibility}
-              />
-            ) : (
-              <FontAwesomeIcon
-                icon={faEyeSlash}
-                className="password-eye"
-                onClick={handleVisibility}
-              />
-            )}
+              {isVisible === true ? (
+                <FontAwesomeIcon
+                  icon={faEye}
+                  className="login-password-eye"
+                  onClick={handleVisibility}
+                />
+              ) : (
+                <FontAwesomeIcon
+                  icon={faEyeSlash}
+                  className="login-password-eye"
+                  onClick={handleVisibility}
+                />
+              )}
             </div>
 
             {errors.password && (
               <p className="error-text">{errors.password.message}</p>
             )}
 
-            <Link to='/' className="forgot-link">Forgot Password?</Link>
+            <Link to="/" className="login-forgot-link">
+              Forgot Password?
+            </Link>
           </div>
 
           <div>
-            <button type="submit" className="submit-btn">
+            <button type="submit" className="login-submit-btn">
               Login
             </button>
           </div>
 
-          <div>
-            <p className="signup-ques">New to Findora? 
-              <span><Link to='/signup' className="signup-link">Create an account</Link></span>
-            </p>
-            
+          <div className="login-end-link">
+            <p className="login-ques">New to Findora?</p>
+
+            <Link to="/signup" className="signup-link">
+              Create an account
+            </Link>
           </div>
         </form>
       </div>
