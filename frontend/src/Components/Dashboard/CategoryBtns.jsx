@@ -1,6 +1,7 @@
 import { useState } from "react";
 import ItemCard from "./ItemCard";
 import sortedItems from "./Items";
+import EndSection from "./EndSection";
 // import maginifyingGlass from "../../assets/maginifyingGlass.svg";
 
 function CategoryBtns() {
@@ -62,9 +63,13 @@ function CategoryBtns() {
       {displayItems.length === 0 ? (
         <p className="no-items">No items found.</p>
       ) : (
-        //  passed items and displayItems as props
-        <ItemCard displayItems={displayItems} />
+        //  passed displayItems as props
+        <div>
+          <ItemCard displayItems={displayItems} />
+          <EndSection />
+          </div>
       )}
+
     </div>
   );
 }

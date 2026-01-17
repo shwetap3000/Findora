@@ -6,7 +6,7 @@ function Footer() {
   return (
     <footer className="footer-wrapper">
       <h3>Findora</h3>
-      <p>Helping you recover what matters !</p>
+      <p className="footer-wrapper-para">Helping you recover what matters!</p>
 
       <div className="quick-links">
         <p>Quick Links:</p>
@@ -17,8 +17,8 @@ function Footer() {
       </div>
 
       <div className="contact-links">
-        <p>Contact Us:</p>
-        Ph: xxxxxxxxxx | email: abc@gmail.com
+        <p>Contact:</p>
+        abc@gmail.com
       </div>
 
       <div className="footer-bottom">

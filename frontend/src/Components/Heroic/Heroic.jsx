@@ -4,6 +4,7 @@ import Info from './Info'
 import Features from './Features'
 import EndSection from './EndSection'
 import BrowseItems from './BrowseItems'
+import Footer from '../Common/Footer'
 
 function Heroic() {
   return (
@@ -12,6 +13,7 @@ function Heroic() {
         <Info />
         <Features />
         <BrowseItems />
+        <Footer />
         
         {/* <EndSection /> */}
     </div>

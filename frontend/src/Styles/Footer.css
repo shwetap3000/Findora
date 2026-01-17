@@ -14,13 +14,16 @@
   margin-bottom: 0;
 }
 
-.footer-wrapper p {
+.footer-wrapper-para {
   font-size: 0.85rem;
+  margin-top: 0;
+  color: rgb(73, 73, 73);
 }
 
 .quick-links p {
   font-weight: 600;
-  margin-bottom: 6px;
+  margin-bottom: 3px;
+  margin-top: 2px;
 }
 
 /* Footer links */
@@ -37,7 +40,7 @@
 }
 
 .contact-links {
-  margin-top: 12px;
+  margin-top: 3px;
   font-size: 14px;
 }
 

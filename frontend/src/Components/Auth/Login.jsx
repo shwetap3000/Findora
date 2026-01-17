@@ -6,6 +6,7 @@ import { useState } from "react";
 import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Navigate, useNavigate, Link } from "react-router-dom";
+import Footer from "../Common/Footer";
 
 
 function Login() {
@@ -194,6 +195,8 @@ function Login() {
           </div>
         </form>
       </div>
+
+      <Footer />
     </div>
   );
 }

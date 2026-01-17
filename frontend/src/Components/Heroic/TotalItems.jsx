@@ -45,7 +45,7 @@ function TotalItems() {
     </div>
 
     <div className="info-card-body">
-      <p className="info-title">Active Users</p>
+      <p className="info-title">Total Items</p>
       <p className="info-value">{totalItems}</p>
     </div>
   </div>

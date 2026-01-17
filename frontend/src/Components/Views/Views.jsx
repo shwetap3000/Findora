@@ -44,8 +44,6 @@ function Views() {
             }
           /> 
         </Routes>
-
-        <Footer />
       </main>
     </div>
   );
