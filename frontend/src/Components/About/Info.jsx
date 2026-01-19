@@ -1,6 +1,6 @@
 import React from 'react'
 import "../../Styles/About.css"
-import { faBullseye, faClipboardCheck, faEnvelope, faStar } from "@fortawesome/free-solid-svg-icons";
+import { faBullseye, faClipboardCheck, faEnvelope, faStar, faShieldHalved } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 function Info() {
@@ -31,6 +31,29 @@ function Info() {
         </p>
         <p className="mission-para">
             <b>3. Reclaim Item: </b> Connect securely and recover the item.
+        </p>
+      </div>
+
+      <div className="missoin-wrapper">
+        <div className="sub-mission-wrapper">
+            <FontAwesomeIcon icon={faShieldHalved} className="misison-icon shield" />
+            <h3 className="mission-heading">Key Features</h3>
+        </div>
+
+        <p className="mission-para">
+            <b>1. Smart Item reporting: </b> Easily report lost or found items by adding clear descriptions, locations, dates, and images to help others identify them accurately.
+        </p>
+        <p className="mission-para">
+            <b>2. Verified Claim Process </b> Users must answer ownership-related questions before reclaiming an item, reducing fake claims and ensuring genuine recovery.
+        </p>
+        <p className="mission-para">
+            <b>3. Secure In-App Communication: </b> Communicate privately with other users after claim approval without exposing phone numbers or email addresses publicly.
+        </p>
+        <p className="mission-para">
+            <b>4. Organized Item Dashboard: </b> View all reported items in a structured dashboard with clear lost/found labels and status updates.
+        </p>
+        <p className="mission-para">
+            <b>5. Mobile-Friendly Experience: </b> Designed to work smoothly across mobile devices for quick access anytime, anywhere on campus.
         </p>
       </div>
 

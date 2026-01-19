@@ -54,11 +54,14 @@
 .envelope {
     color: rgb(0, 108, 15);
     margin-top: 3px;
-
 }
 
 .star {
     color: rgb(237, 186, 0);
+}
+
+.shield {
+    color: red;
 }
 
 .mission-heading {

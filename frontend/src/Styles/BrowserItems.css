@@ -26,6 +26,7 @@
         transform 0.2s ease,
         box-shadow 0.2s ease,
         background-color 0.2s ease;
+
 }
 
 /* Hover / Tap */
@@ -44,5 +45,5 @@
 .browser-link {
     color: white;
     text-decoration: none;
-    margin-left: 0.5rem;
+    /* margin-left: 0.5rem; */
 }
