@@ -1,3 +1,5 @@
 1. Popup message for report lost and report found 
 2. Popup message for successful login and logout
-3. Fully functional signup page
+3. Popup message for successful signup and navigate page to login page
+4. Improve scroll behaviour on page navigation
+5. Check if confirm password is same as the created password 

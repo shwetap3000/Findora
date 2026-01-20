@@ -114,7 +114,7 @@ function ReportLost() {
           <input
             type="text"
             className="form-input"
-            placeholder="Describe the item (color, brand, any details)..."
+            placeholder="Brief public description of the item"
             {...register("description", {
               required: "Please provide a description of the item.",
               minLength: {
@@ -131,6 +131,8 @@ function ReportLost() {
           {errors.description && (
             <p className="error-text">{errors.description.message}</p>
           )}
+
+           <p className="helper-text">Do not include private or ownership-proof details (e.g., serial numbers, contents, unique marks). These will be asked during the claim process.</p>
         </div>
 
         {/* Date and Location fields */}
@@ -175,18 +177,6 @@ function ReportLost() {
           {errors.location && (
             <p className="error-text">{errors.location.message}</p>
           )}
-        </div>
-
-        <div className="form-fields">
-          <label className="form-labels">
-            Additional Identifiers (Optional){" "}
-          </label>
-          <input
-            type="text"
-            placeholder="e.g. Serial number, unique marks.."
-            className="form-input"
-            {...register("additional_identifiers")}
-          />
         </div>
 
         <div className="form-fields">
