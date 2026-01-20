@@ -5,7 +5,6 @@ class Found(models.Model):
     description = models.CharField(max_length=500)
     date = models.DateField()
     location = models.CharField(max_length=120)
-    additional_identifiers = models.TextField(blank=True)
     status = models.CharField(editable=False, default="found", max_length=10)
     image = models.FileField(blank=True)
     contact_type = models.CharField()
