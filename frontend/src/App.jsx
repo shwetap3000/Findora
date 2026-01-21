@@ -1,10 +1,14 @@
 import "./App.css";
+import Claim_Item from "./Components/Claim_Form/Claim_Item";
+import Navbar from "./Components/Common/Navbar";
 import Views from "./Components/Views/Views";
 
 function App() {
   return (
     <div>
+      {/* <Navbar /> */}
       <Views />
+      {/* <Claim_Item /> */}
     </div>
   )
 }

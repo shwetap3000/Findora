@@ -10,12 +10,13 @@ import Footer from "../Common/Footer";
 import loginImg from "../../assets/loginPage.png";
 
 function Login() {
-  // usestate to store the login result
-  const [success, setSuccess] = useState("");
-  const [error, setError] = useState("");
+  // to navigate the page after successful login
   const navigate = useNavigate();
 
   const [isVisible, setIsVisible] = useState(false);
+
+  // state variable to store the login status (for showing successful or invalid credentials message)
+  const [loginStatus, setLoginStatus] = useState(null);
 
   const handleVisibility = () => {
     setIsVisible(!isVisible);
@@ -29,14 +30,13 @@ function Login() {
   } = useForm();
 
   const onSubmit = async (data) => {
-    try {
-      // clear previous message
-      setSuccess("");
-      setError("");
+    setLoginStatus("");
 
+    try {
       const response = await axios.post(
         "http://127.0.0.1:8000/accounts/login/",
-        // "http://192.168.1.4:8000/accounts/login/",
+
+        // this should be like this only bcoz the backend accepts the data in this format only else it will give an error (it should be email and password only as we have used the same name in the accounts login serializer)
         {
           email: data.email,
           password: data.password,
@@ -48,68 +48,35 @@ function Login() {
         },
       );
 
-      // store jwt refresh and access token
       localStorage.setItem("accessToken", response.data.access);
       localStorage.setItem("refreshToken", response.data.refresh);
-      alert("Logged-in successfully!");
 
-      // after login navigate to profile page
       navigate("/profile");
-
-      // set success message
-      // console.log("Logged-in successfully", response.data);
-      setSuccess("Logged-in successfully");
     } catch (error) {
-      // clear success message and set error message
-      setSuccess("");
-      setError("Invalid email or password");
-      console.log("Failed: ", error.response.data);
-      console.log("Failed: ", error);
+      // console.log("Error: ", error);
+      setLoginStatus("error");
+
+      // scroll to top behaviour on button click (as the error message will be shown up)
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth",
+      });
     }
   };
 
-  //   const onSubmit = (data) => {
-  //     alert("Form Submitted successfully");
-  //     console.log(data);
-  //   }
-
-  // // sending data to django backend for authentication
-  // const onSubmit = async (data) => {
-  //   // const formData = {
-  //   //     email: data.email,
-  //   //     password: data.password
-  //   // }
-  //   // const formData = new FormData
-
-  //   await axios.post(
-  //     "http://127.0.0.1:8000/accounts/login/",
-  //     {
-  //       email: data.email,
-  //       password: data.password,
-  //     },
-  //     {
-  //       headers: {
-  //         "Content-Type": "application/json",
-  //       },
-  //     }
-  //   );
-
-  //   // // LoginView url form accounts app
-  //   // await axios.post('', formData);
-  //   // alert("Form submitted successfully");
-
-  //   // console.log(formData);
-  //   // reset();
-  // };
+  console.log(loginStatus)
 
   return (
     <div>
-      <div className="login-form-wrapper">
-        {/* <div>
-          {success && <p>{success}</p>}
-          {error && <p>{error}</p>}
-        </div> */}
+      {
+        loginStatus === "error" && 
+        <div className="login-failed">
+          "Invalid login credentials."
+        </div>
+      }
 
+      <div className="login-form-wrapper">
+      
         <form onSubmit={handleSubmit(onSubmit)} className="login-sub-wrapper">
           <div className="login-welcome">
             <h2 className="login-welcome-header">Welcome Back!</h2>
@@ -205,3 +172,83 @@ function Login() {
 }
 
 export default Login;
+
+// // usestate to store the login result
+// const [success, setSuccess] = useState("");
+// const [error, setError] = useState("");
+
+// const onSubmi = async (data) => {
+//   try {
+//     // // clear previous message
+//     // // we are using this becuase if we have success message and then try to login with invalid credentials then both messages will be shown
+//     // setSuccess("");
+//     // setError("");
+
+//     const response = await axios.post(
+//       "http://127.0.0.1:8000/accounts/login/",
+//       // "http://192.168.1.4:8000/accounts/login/",
+//       {
+//         email: data.email,
+//         password: data.password,
+//       },
+//       {
+//         headers: {
+//           "Content-Type": "application/json",
+//         },
+//       },
+//     );
+
+//     // store jwt refresh and access token
+//     localStorage.setItem("accessToken", response.data.access);
+//     localStorage.setItem("refreshToken", response.data.refresh);
+//     // alert("Logged-in successfully!");
+
+//     // after login navigate to profile page
+//     navigate("/profile");
+
+//     // set success message
+//     // console.log("Logged-in successfully", response.data);
+//     // setSuccess("Logged-in successfully");
+//   } catch (error) {
+//     // // clear success message and set error message
+//     // // clearing success msg so that it is never shown on failure
+//     // setSuccess("");
+//     // setError("Invalid email or password");
+//     console.log("Failed: ", error.response.data);
+//     console.log("Failed: ", error);
+//   }
+// };
+
+//   const onSubmit = (data) => {
+//     alert("Form Submitted successfully");
+//     console.log(data);
+//   }
+
+// // sending data to django backend for authentication
+// const onSubmit = async (data) => {
+//   // const formData = {
+//   //     email: data.email,
+//   //     password: data.password
+//   // }
+//   // const formData = new FormData
+
+//   await axios.post(
+//     "http://127.0.0.1:8000/accounts/login/",
+//     {
+//       email: data.email,
+//       password: data.password,
+//     },
+//     {
+//       headers: {
+//         "Content-Type": "application/json",
+//       },
+//     }
+//   );
+
+//   // // LoginView url form accounts app
+//   // await axios.post('', formData);
+//   // alert("Form submitted successfully");
+
+//   // console.log(formData);
+//   // reset();
+// };
