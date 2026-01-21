@@ -8,12 +8,15 @@ import PrivateRoute from "./PrivateRoute";
 import Login from "../Auth/Login";
 import SignUp from "../Auth/SignUp";
 import About from "../About/About";
+import ScrollToTop from "./ScrollToTop";
 
 function Views() {
   return (
     <div className="page">
       <main className="content">
         <Navbar />
+
+        <ScrollToTop />
 
         <Routes>
           {/* Public routes */}
