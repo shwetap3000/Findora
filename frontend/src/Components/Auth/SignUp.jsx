@@ -10,6 +10,9 @@ import Footer from "../Common/Footer";
 import signupImg from "../../assets/signupPage.png";
 
 function SignUp() {
+
+  const [sigupStatus, setSigupStatus] = useState(null);
+
   // state varaible for handling hide and show password feature
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
 
@@ -33,11 +36,15 @@ function SignUp() {
     formState: { errors },
   } = useForm();
 
-  // const onSubmit = (data) => {
-  //   console.log(data);
-  // };
 
   const onSubmit = async (data) => {
+
+    // condition to check if password is equal to confirm password and if they are not equal then prevent form submission and raise an error
+    if (data.password !== data.confirmPassword) {
+      setSigupStatus("error");
+      return;
+    }
+
     try {
       const response = await axios.post(
         "http://127.0.0.1:8000/accounts/register/",
@@ -60,6 +67,7 @@ function SignUp() {
 
   return (
     <div>
+
       <div className="singup-form-wrapper">
         <form onSubmit={handleSubmit(onSubmit)} className="signup-sub-wrapper">
           <div className="signup-welcome">
@@ -164,7 +172,7 @@ function SignUp() {
             <div className="signup-password-wrapper">
               <input
                 type={isConfirmPasswordVisible === true ? "text" : "password"}
-                placeholder="Enter your confirm password"
+                placeholder="Enter confirm password"
                 className="signup-form-input"
                 {...register("confirmPassword", {
                   required: "Confirm Password is required.",
@@ -185,10 +193,13 @@ function SignUp() {
                 />
               )}
             </div>
-
-            {errors.password && (
-              <p className="error-text">{errors.password.message}</p>
-            )}
+          
+            {/* error message to be display when confirm  password is no equal to password */}
+            {
+              sigupStatus ===  "error" && (
+                <p className="error-text">Confirm password must be equal to password.</p>
+              )
+            }
           </div>
 
           <div>
