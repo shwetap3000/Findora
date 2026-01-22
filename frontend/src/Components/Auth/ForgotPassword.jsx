@@ -3,6 +3,7 @@ import { useForm } from "react-hook-form";
 import {Link} from 'react-router-dom'
 import "../../Styles/ForgotPassword.css";
 import forgotPassword from "../../assets/forgotPassword.png";
+import Footer from "../Common/Footer";
 
 function ForgotPassword() {
   const { handleSubmit, reset } = useForm();
@@ -57,6 +58,8 @@ function ForgotPassword() {
           </div>
         </form>
       </div>
+
+      <Footer />
     </div>
   );
 }

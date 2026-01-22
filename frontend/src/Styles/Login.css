@@ -24,7 +24,7 @@
 }
 
 .login-welcome-header {
-    font-size: 32px;
+    font-size: 34px;
     font-family: cursive;
     font-weight: 600;
     color: #0e3694;
@@ -160,48 +160,3 @@
 
 
 
-
-
-
-
-
-
-/* .login-welcome {
-    text-align: center;
-    margin-bottom: 3rem;
-}
-
-.login-welcome-para {
-    color: #555;
-    font-size: medium;
-    margin-top: 0rem;
-}
-
-.login-welcome-header {
-    font-size: 2rem;
-    margin-bottom: 0rem;
-    color: rgb(17, 44, 143);
-    font-family: cursive;
-}
-
-.forgot-link {
-    margin-left: 7rem;
-    margin-top: 0.5rem;
-    text-decoration: none;
-    align-self: flex-end;
-}
-
-.signup-link {
-    margin-left: 0.5rem;
-    text-decoration: none;
-}
-
-.login-sub-wrapper {
-    margin: 1.5rem;
-    margin-bottom: 0;
-}
-
-.login-img {
-    width: 18rem;
-    height: 12rem;
-} */
