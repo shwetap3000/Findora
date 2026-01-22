@@ -9,6 +9,7 @@ import Login from "../Auth/Login";
 import SignUp from "../Auth/SignUp";
 import About from "../About/About";
 import ScrollToTop from "./ScrollToTop";
+import ForgotPassword from "../Auth/ForgotPassword";
 
 function Views() {
   return (
@@ -25,6 +26,7 @@ function Views() {
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<SignUp />} />
+          <Route path="/forgot-password" element={<ForgotPassword />} />
 
           {/* <Route path="/report" element={<Report />} />
           <Route path="/profile" element={<Profile />} /> */}

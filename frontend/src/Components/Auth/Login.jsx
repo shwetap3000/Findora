@@ -62,6 +62,8 @@ function Login() {
         behavior: "smooth",
       });
     }
+
+    reset();
   };
 
   console.log(loginStatus)
@@ -145,7 +147,7 @@ function Login() {
               <p className="error-text">{errors.password.message}</p>
             )}
 
-            <Link to="/" className="login-forgot-link">
+            <Link to="/forgot-password" className="login-forgot-link">
               Forgot Password?
             </Link>
           </div>

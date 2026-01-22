@@ -3,3 +3,5 @@
 3. Popup message for successful signup and navigate page to login page
 4. Improve scroll behaviour on page navigation
 5. Check if confirm password is same as the created password 
+
+fully functional claim feature
