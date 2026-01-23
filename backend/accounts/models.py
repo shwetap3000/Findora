@@ -1,6 +1,10 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 from django.db.models.signals import post_save
+from django.utils import timezone
+
+# utils provides small helper utilities ad give ready made tools for common tasks
+
 
 # identity + auth
 class UserModel(AbstractUser):
@@ -42,13 +46,31 @@ post_save.connect(save_user_profile, sender=UserModel)
 
 
 
+# Reset Password Model
 
+class PasswordResetToken(models.Model):
 
+    user = models.ForeignKey(
+        UserModel,
+        on_delete=models.CASCADE,
+        related_name='password_reset_token' 
+    )
 
+    token = models.CharField(max_length=255, unique=True)
 
+    created_at = models.DateTimeField(auto_now_add=True)
 
+    expires_at = models.DateTimeField()
 
+    is_used = models.BooleanField(default=False)
 
+    def __str__(self):
+        # here user is instance of the UserModel which we have with this model 
+        return f"Token for {self.user.name}"
+    
+    # token validation function (to check if a token is valid or expired)
+    def is_expired(self):
+        return timezone.now() > self.expires_at
 
 
 

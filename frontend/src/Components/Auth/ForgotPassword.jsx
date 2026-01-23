@@ -60,6 +60,7 @@ function ForgotPassword() {
       </div>
 
       <Footer />
+      
     </div>
   );
 }
