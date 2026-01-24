@@ -141,7 +141,7 @@ CORS_ALLOWED_ORIGINS = [
 CORS_ALLOW_CREDENTIALS = True
 
 
-# this must be before migrations
+# this must be added before migrations
 AUTH_USER_MODEL = 'accounts.UserModel'
 
 

@@ -66,7 +66,7 @@ class PasswordResetToken(models.Model):
 
     def __str__(self):
         # here user is instance of the UserModel which we have with this model 
-        return f"Token for {self.user.name}"
+        return f"Token for {self.user.email}"
     
     # token validation function (to check if a token is valid or expired)
     def is_expired(self):

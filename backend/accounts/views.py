@@ -7,8 +7,13 @@ from rest_framework.decorators import api_view, permission_classes
 from rest_framework.authentication import authenticate
 from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework.permissions import IsAuthenticated
-from .models import UserModel
+from .models import UserModel, PasswordResetToken
+from django.contrib.auth import get_user_model
+from django.utils import timezone
+from datetime import timedelta
+import secrets
 
+User = get_user_model()
 
 @api_view(['POST'])
 def RegisterView(request):
@@ -68,6 +73,43 @@ def TotalUsersView(request):
         # this name should exactly written when fetching the data
         'total_users': users_count
     })
+
+
+@api_view(['POST'])
+def ForgotPasswordView(request):
+    email = request.data.get("email")
+    print(email)
+
+    if not email:
+        return Response(
+            {"error": "Email is required."},
+            status=status.HTTP_400_BAD_REQUEST
+        )
+    
+    try:
+        user = User.objects.get(email=email)
+
+    except User.DoesNotExist:
+        return Response(
+            {"message": "If user exists, a link has been sent."},
+            status=status.HTTP_200_OK
+        )
+    
+    # This line creates a strong, random string that attackers cannot guess, and that can safely be sent inside a password reset link.  32 meansit generates 32 random bytes
+    token = secrets.token_urlsafe(32)
+    expires_at = timezone.now() + timedelta(minutes=15)
+
+    PasswordResetToken.objects.create(
+        user=user,
+        token=token,
+        expires_at=expires_at
+    )
+
+    return Response(
+        {'message' : "If the email exists, a reset link has been sent."},
+        status=status.HTTP_200_OK
+    )
+    
 
 
 

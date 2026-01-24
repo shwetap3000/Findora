@@ -500,10 +500,9 @@ When user submits email:
 
 ---
 
-## 📁 STEP 2.1: Decide API location
+## STEP 2.1: Decide API location
 
 Inside your auth app:
-
 ```
 accounts/
   views.py
@@ -515,20 +514,17 @@ We’ll start with **views.py**.
 
 ---
 
-## 🔐 STEP 2.2: Token generation logic (VERY IMPORTANT)
+## STEP 2.2: Token generation logic (VERY IMPORTANT)
 
 ### Why not random strings manually?
-
 Because security.
 
 ### Best practice in Python:
-
 ```python
 import secrets
 ```
 
 Use:
-
 ```python
 secrets.token_urlsafe(32)
 ```
@@ -539,7 +535,7 @@ secrets.token_urlsafe(32)
 
 ---
 
-## ⏱️ STEP 2.3: Token expiry logic
+## STEP 2.3: Token expiry logic
 
 We’ll give token **15 minutes** life.
 
@@ -552,7 +548,7 @@ expires_at = timezone.now() + timedelta(minutes=15)
 
 ---
 
-## 🧱 STEP 2.4: Write the Forgot Password View
+## STEP 2.4: Write the Forgot Password View
 
 I’ll give you the **clean version first**, then explain line by line.
 
@@ -569,6 +565,7 @@ import secrets
 
 from .models import PasswordResetToken
 
+# Custom user model is the actual model that defines the user fields and database table, while get_user_model() is a Django helper that safely returns that active user model without hard-coding its name.
 User = get_user_model()
 
 
@@ -584,6 +581,7 @@ class ForgotPasswordAPIView(APIView):
             )
 
         try:
+          # django search the user table for exactly one user with this email
             user = User.objects.get(email=email)
         except User.DoesNotExist:
             # IMPORTANT: don't reveal whether user exists

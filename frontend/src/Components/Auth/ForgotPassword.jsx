@@ -1,16 +1,43 @@
 import React from "react";
 import { useForm } from "react-hook-form";
-import {Link} from 'react-router-dom'
+import { Link } from "react-router-dom";
 import "../../Styles/ForgotPassword.css";
 import forgotPassword from "../../assets/forgotPassword.png";
 import Footer from "../Common/Footer";
+import axios from 'axios'
 
 function ForgotPassword() {
-  const { handleSubmit, reset } = useForm();
+  const {
+    register,
+    reset,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
 
-  const onSubmit = (data) => {
-    console.log("Form submitted successfully.");
-  };
+
+  // updated function to send email to the backend
+  const onSubmit = async (data) => {
+    try {
+
+      const response = await axios.post(
+        "http://127.0.0.1:8000/accounts/forgot-password/",
+        {
+          email: data.email
+        }
+      );
+
+      alert(response.data.message)
+      reset();
+    } catch (error) {
+      alert("Something went wrong. Please try again.")
+      console.log(error);
+    }
+  }
+
+  // const onSubmit = (data) => {
+  //   console.log("Form submitted successfully.");
+  //   console.log(data);
+  // };
 
   return (
     <div>
@@ -41,7 +68,14 @@ function ForgotPassword() {
               type="text"
               placeholder="Enter your email"
               className="forgot-form-input"
+              {...register("email", {
+                required: "Email is required.",
+              })}
             />
+
+            {errors.email && (
+              <p className="error-text">{errors.email.message}</p>
+            )}
           </div>
 
           <div>
@@ -51,16 +85,15 @@ function ForgotPassword() {
           </div>
 
           <div className="forgot-end-link">
-            <p className="forgot-ques">
-                Remember your password?
-            </p>
-            <Link to='/login' className="forgot-link">Login</Link>
+            <p className="forgot-ques">Remember your password?</p>
+            <Link to="/login" className="forgot-link">
+              Login
+            </Link>
           </div>
         </form>
       </div>
 
       <Footer />
-      
     </div>
   );
 }
