@@ -75,6 +75,10 @@ def TotalUsersView(request):
     })
 
 
+# ForgotPasswordView -> request a reset
+# ResetPasswordView -> actually changes the password
+
+
 @api_view(['POST'])
 def ForgotPasswordView(request):
     email = request.data.get("email")
@@ -109,6 +113,55 @@ def ForgotPasswordView(request):
         {'message' : "If the email exists, a reset link has been sent."},
         status=status.HTTP_200_OK
     )
+
+
+@api_view(['POST'])
+def ResetPasswordView(request, token):
+    password = request.data.get("password")
+    confirm_password = request.data.get("confirm_password")
+
+    # Check if passwords exist
+    if not password or not confirm_password:
+        return Response(
+            {"error": "Both password fields are required."},
+            status=status.HTTP_400_BAD_REQUEST
+        )
+
+    # Check if passwords match
+    if password != confirm_password:
+        return Response(
+            {"error": "Passwords do not match."},
+            status=status.HTTP_400_BAD_REQUEST
+        )
+
+    try:
+        reset_obj = PasswordResetToken.objects.get(token=token)
+    except PasswordResetToken.DoesNotExist:
+        return Response(
+            {"error": "Invalid or expired token."},
+            status=status.HTTP_400_BAD_REQUEST
+        )
+
+    # Check if token expiry
+    if reset_obj.expires_at < timezone.now():
+        reset_obj.delete()
+        return Response(
+            {"error": "Token has expired."},
+            status=status.HTTP_400_BAD_REQUEST
+        )
+
+    # Update password
+    user = reset_obj.user
+    user.set_password(password)   # IMPORTANT
+    user.save()
+
+    reset_obj.delete()
+
+    return Response(
+        {"message": "Password reset successful."},
+        status=status.HTTP_200_OK
+    )
+
     
 
 
