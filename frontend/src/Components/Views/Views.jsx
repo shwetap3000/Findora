@@ -10,6 +10,7 @@ import SignUp from "../Auth/SignUp";
 import About from "../About/About";
 import ScrollToTop from "./ScrollToTop";
 import ForgotPassword from "../Auth/ForgotPassword";
+import ResetPassword from "../Auth/ResetPassword";
 
 function Views() {
   return (
@@ -27,6 +28,7 @@ function Views() {
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<SignUp />} />
           <Route path="/forgot-password" element={<ForgotPassword />} />
+          <Route path="/reset-password/:token" element={<ResetPassword />} />
 
           {/* <Route path="/report" element={<Report />} />
           <Route path="/profile" element={<Profile />} /> */}

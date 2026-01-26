@@ -11,7 +11,10 @@ from .models import UserModel, PasswordResetToken
 from django.contrib.auth import get_user_model
 from django.utils import timezone
 from datetime import timedelta
+from django.core.mail import send_mail
+from django.conf import settings
 import secrets
+
 
 User = get_user_model()
 
@@ -102,6 +105,17 @@ def ForgotPasswordView(request):
     # This line creates a strong, random string that attackers cannot guess, and that can safely be sent inside a password reset link.  32 meansit generates 32 random bytes
     token = secrets.token_urlsafe(32)
     expires_at = timezone.now() + timedelta(minutes=15)
+
+    reset_link = f"http://localhost:3000/reset-password/{token}"
+
+    send_mail(
+        subject="Reset your password",
+        message=f"Click the link to reset your password:\n{reset_link}",
+        from_email=settings.EMAIL_HOST_USER,
+        recipient_list=[email],
+        fail_silently=False,
+    )
+
 
     PasswordResetToken.objects.create(
         user=user,
