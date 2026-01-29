@@ -106,7 +106,7 @@ def ForgotPasswordView(request):
     token = secrets.token_urlsafe(32)
     expires_at = timezone.now() + timedelta(minutes=15)
 
-    reset_link = f"http://localhost:3000/reset-password/{token}"
+    reset_link = f"http://localhost:5173/reset-password/{token}"
 
     send_mail(
         subject="Reset your password",
