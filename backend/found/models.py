@@ -17,33 +17,33 @@ class Found(models.Model):
 
 
 
-class Claim(models.Model):
+# class Claim(models.Model):
 
-    item = models.ForeignKey(
-        "Found",
-        on_delete=models.CASCADE,
-        related_name="claims" 
-    )
+#     item = models.ForeignKey(
+#         "Found",
+#         on_delete=models.CASCADE,
+#         related_name="claims" 
+#     )
 
-    claimant = models.ForeignKey(
-        settings.AUTH_USER_MODEL,
-        on_delete=models.CASCADE,
-        related_name="claims"   
-    )
+#     claimant = models.ForeignKey(
+#         settings.AUTH_USER_MODEL,
+#         on_delete=models.CASCADE,
+#         related_name="claims"   
+#     )
 
-    additional_details = models.TextField()
+#     additional_details = models.TextField()
 
-    status = models.CharField(
-        max_length=20,
-        choices=[
-            ("pending", "Pending"),
-            ("approved", "Approved"),
-            ("rejected", "Rejected"), 
-        ],
-        default="pending"
-    )
+#     status = models.CharField(
+#         max_length=20,
+#         choices=[
+#             ("pending", "Pending"),
+#             ("approved", "Approved"),
+#             ("rejected", "Rejected"), 
+#         ],
+#         default="pending"
+#     )
 
-    created_at = models.DateTimeField(auto_now_add=True)
+#     created_at = models.DateTimeField(auto_now_add=True)
 
-    def __str__(self):
-        return f"Claim by {self.claimant.username} for Item {self.item.id}"
+#     def __str__(self):
+#         return f"Claim by {self.claimant.username} for Item {self.item.id}"

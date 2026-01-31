@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Found, Claim
+from .models import Found
 
 admin.site.register(Found)
-admin.site.register(Claim)
+# admin.site.register(Claim)

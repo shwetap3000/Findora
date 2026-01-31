@@ -36,6 +36,7 @@ INSTALLED_APPS = [
     'accounts',
     'lost',
     'found',
+    'claims',
     # 'jazzmin',
 
     'corsheaders',  # Added for handling CORS
