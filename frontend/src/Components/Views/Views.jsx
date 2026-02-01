@@ -11,6 +11,8 @@ import About from "../About/About";
 import ScrollToTop from "./ScrollToTop";
 import ForgotPassword from "../Auth/ForgotPassword";
 import ResetPassword from "../Auth/ResetPassword";
+import ClaimForm from "../Claim/ClaimForm";
+import ClaimList from "../Claim/ClaimList";
 
 function Views() {
   return (
@@ -34,7 +36,7 @@ function Views() {
           <Route path="/profile" element={<Profile />} /> */}
 
           {/* Private routes */}
-           <Route
+          <Route
             path="/report"
             element={
               <PrivateRoute>
@@ -49,7 +51,25 @@ function Views() {
                 <Profile />
               </PrivateRoute>
             }
-          /> 
+          />
+
+          <Route
+            path="/claim/:itemId"
+            element={
+              <PrivateRoute>
+                <ClaimForm />
+              </PrivateRoute>
+            }
+          />
+
+          <Route
+            path="/my-claims"
+            element={
+              <PrivateRoute>
+                <ClaimList />
+              </PrivateRoute>
+            }
+          />
         </Routes>
       </main>
     </div>

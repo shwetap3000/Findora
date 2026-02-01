@@ -1,4 +1,5 @@
 from django.db import models
+from accounts.models import UserModel
 from django.conf import settings
 
 class Found(models.Model):

@@ -34,6 +34,11 @@ class Claim(models.Model):
 
     created_at = models.DateField(auto_now_add=True)
 
+    contact_email = models.EmailField(blank=True, null=True)
+    contact_phone = models.CharField(max_length=10, blank=True, null=True)
+
+    approved_at = models.DateTimeField(null=True, blank=True)
+
     class Meta:
         unique_together = ('claimant', 'found_item')
 

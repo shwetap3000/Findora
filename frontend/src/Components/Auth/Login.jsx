@@ -50,6 +50,9 @@ function Login() {
 
       localStorage.setItem("accessToken", response.data.access);
       localStorage.setItem("refreshToken", response.data.refresh);
+      localStorage.setItem('user', JSON.stringify(response.data.user));
+
+      console.log("User stored: ", response.data.user);
 
       navigate("/profile");
     } catch (error) {

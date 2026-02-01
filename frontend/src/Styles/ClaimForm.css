@@ -1,0 +1,99 @@
+/* Page wrapper */
+.claim-form-wrapper {
+  min-height: 100vh; /* adjusts with navbar */
+  padding: 1.2rem 1rem 2rem;
+  background-color: #f7f9fc;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Heading */
+.claim-form-wrapper h2 {
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: #1f2937;
+  margin-bottom: 1rem;
+}
+
+/* Form card */
+.claim-form-wrapper form {
+  width: 90%;
+  max-width: 420px;
+  background: #ffffff;
+  padding: 1.4rem;
+  border-radius: 14px;
+  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.08);
+}
+
+/* Textarea */
+.claim-form-wrapper textarea {
+  width: 90%;
+  min-height: 120px;
+  padding: 0.8rem;
+  border-radius: 10px;
+  border: 1px solid #d1d5db;
+  font-size: 0.95rem;
+  resize: none;
+  outline: none;
+  margin-bottom: 1rem;
+  font-family: inherit;
+}
+
+.claim-form-wrapper textarea::placeholder {
+  color: #9ca3af;
+}
+
+.claim-form-wrapper textarea:focus {
+  border-color: #4f46e5;
+}
+
+/* Inputs */
+.claim-form-wrapper input {
+  width: 90%;
+  padding: 0.75rem;
+  border-radius: 10px;
+  border: 1px solid #d1d5db;
+  font-size: 0.95rem;
+  outline: none;
+  margin-bottom: 0.8rem;
+}
+
+.claim-form-wrapper input::placeholder {
+  color: #9ca3af;
+}
+
+.claim-form-wrapper input:focus {
+  border-color: #4f46e5;
+}
+
+/* Submit button */
+.claim-form-wrapper button {
+  width: 100%;
+  padding: 0.8rem;
+  margin-top: 0.5rem;
+
+  border-radius: 10px;
+  border: none;
+  background-color: #4f46e5;
+  color: #ffffff;
+
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.25s ease;
+}
+
+.claim-form-wrapper button:hover {
+  background-color: #4338ca;
+}
+
+/* Hint text */
+.claim-hint {
+  max-width: 420px;
+  text-align: center;
+  font-size: 0.85rem;
+  color: #6b7280;
+  margin-top: 0.9rem;
+  line-height: 1.4;
+}

@@ -22,4 +22,5 @@ urlpatterns = [
     path('lost/', include('lost.urls')),
     path('found/', include('found.urls')),
     path('accounts/', include('accounts.urls')),
+    path('claim/', include('claims.urls')),
 ]

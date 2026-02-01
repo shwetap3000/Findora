@@ -18,8 +18,10 @@ function UserInfo() {
   }
 
   const handleYes = () => {
-    localStorage.removeItem('accessToken');
-    localStorage.removeItem('refreshToken');
+    localStorage.clear();
+    // localStorage.removeItem('accessToken');
+    // localStorage.removeItem('refreshToken');
+    // localStorage.removeItem('user');
     alert('Logout successfully');
 
     navigate("/");
